@@ -1,0 +1,93 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Accurate short-term knowledge of traffic conditions is essential for
+understanding and managing the dynamics of urban road networks.
+However, traffic evolution is difficult to predict because it results from
+the interaction of two strongly coupled components. On the one hand, traffic
+at a given location follows temporal patterns determined by its recent
+history; on the other hand, changes occurring on one road segment can
+propagate through the network and affect other connected locations. A
+forecasting model should therefore be able to exploit both temporal
+dependencies and the spatial structure of the road network.
+
+Accurate point forecasts alone, however, are not sufficient in practical
+settings. Traffic conditions may change rapidly, particularly during
+congestion events, making some predictions substantially more uncertain than
+others. A forecasting system should therefore provide not only an estimate of
+future traffic conditions, but also an indication of the uncertainty
+associated with that estimate. Moreover, this uncertainty should remain
+meaningful when the model encounters conditions that differ from those
+observed during training.
+
+This work investigates these aspects using the METR-LA traffic-sensor
+network. Starting from a simple persistence baseline, a temporal forecasting
+model based on Gated Recurrent Units (GRUs) is first considered to model the
+temporal evolution of each sensor independently. Spatial information is then
+introduced through a graph-temporal architecture combining diffusion-style
+message passing over the road-sensor graph with recurrent temporal modeling.
+Both learned models produce probabilistic forecasts through conditional
+quantile estimation, allowing point accuracy and predictive uncertainty to be
+evaluated jointly.
+
+Beyond aggregate forecasting performance, particular attention is devoted to
+understanding the contribution of the graph and the robustness of the
+probabilistic predictions. The graph-temporal model is analyzed at the sensor
+level, under different graph configurations and diffusion depths, and under a
+distribution shift defined by unusually high network-wide congestion.
+Finally, calibration strategies are investigated to determine whether the
+reliability of the predictive intervals can be improved when the forecasting
+conditions become more challenging.
+
+
+\subsection{Objectives and Research Questions}
+\label{subsec:objectives}
+
+The main objective of this work is to design and evaluate a compact,
+probabilistic graph-temporal forecasting pipeline while investigating the
+interaction between predictive accuracy, spatial information, uncertainty
+calibration, and robustness under distribution shift.
+
+More specifically, the experimental analysis is organized around the
+following research questions:
+
+\begin{enumerate}
+    \item \textbf{Does graph message passing improve traffic forecasting
+    compared with temporal modeling alone?}
+
+    This question is investigated by comparing a persistence baseline, a
+    temporal GRU without spatial information exchange, and a graph-temporal
+    model that propagates information between connected traffic sensors.
+
+    \item \textbf{How does the graph representation affect forecasting
+    performance?}
+
+    The contribution of the graph is examined both at the individual-sensor
+    level and through controlled architectural experiments. In particular,
+    the analysis investigates where graph message passing helps or hurts,
+    whether extending the spatial diffusion depth provides additional
+    benefits, and whether the original weighted graph contains useful
+    information beyond connectivity alone.
+
+    \item \textbf{How reliable are the probabilistic forecasts under normal
+    and shifted traffic conditions?}
+
+    Forecast uncertainty is evaluated through quantile-based predictive
+    intervals, considering both empirical coverage and interval width. A
+    predefined high-congestion stress test is then used to investigate how
+    point accuracy and uncertainty calibration change when the model is
+    evaluated under more challenging traffic conditions.
+
+    \item \textbf{Can the calibration degradation observed under
+    distribution shift be mitigated?}
+
+    A post-hoc Conformalized Quantile Regression calibration procedure is
+    evaluated, while a congestion-aware training strategy is considered as a
+    complementary approach for directly improving robustness to rare
+    congestion regimes.
+\end{enumerate}
+
+Together, these questions shift the analysis beyond average forecasting
+accuracy and toward a more complete assessment of when spatial information
+is useful, when the model becomes uncertain, and whether its uncertainty
+estimates remain reliable under distribution shift.

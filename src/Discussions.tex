@@ -1,0 +1,98 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Main Findings}
+\label{subsec:main_findings}
+
+The experiments provide evidence that both temporal and spatial information
+are relevant for traffic forecasting on METR-LA. The Temporal model already
+provides a substantial improvement over persistence, showing that recent
+sensor histories contain strong predictive information. Incorporating graph
+message passing further improves forecasting accuracy, with the benefit
+becoming more evident at longer forecasting horizons. Moreover, the
+sensor-level analysis shows that this improvement is widespread across the
+network, although a small number of sensors do not benefit from spatial
+information.
+
+The graph ablations further show that the way spatial information is
+represented matters. Increasing the diffusion depth from $K=2$ to $K=3$
+provides only limited additional benefits and introduces a less favorable
+balance between error metrics, calibration, and computational cost. In
+contrast, replacing the weighted adjacency matrix with a binary one produces
+a clearer degradation in forecasting accuracy, particularly at longer
+horizons. This suggests that the original edge weights provide useful
+information beyond graph connectivity alone.
+
+The probabilistic analysis reveals a different aspect of model performance.
+The Graph-Temporal model produces sharper intervals and lower quantile losses
+than the Temporal model, but its empirical coverage is slightly below the
+nominal 80\% level. More importantly, this reliability degradation becomes
+stronger under distribution shift. During high-congestion periods, both point
+forecasting errors and prediction interval widths increase, while coverage
+decreases at longer horizons. The model therefore recognizes part of the
+increased uncertainty associated with congestion, but does not fully capture
+the shifted predictive distribution.
+
+Finally, the mitigation experiments show that post-hoc calibration can
+substantially improve uncertainty reliability. CQR brings overall empirical
+coverage close to the nominal level without modifying the median forecasts or
+retraining the model. However, residual undercoverage remains under
+high-congestion conditions, particularly at the longest horizon. This result
+indicates that good marginal calibration does not necessarily imply equally
+reliable uncertainty estimates under specific shifted conditions and
+motivates mitigation strategies that explicitly account for rare traffic
+regimes during training.
+
+
+\subsection{Limitations}
+\label{subsec:limitations}
+
+Several limitations should be considered when interpreting the results.
+First, the experiments are conducted exclusively on METR-LA and therefore
+reflect the spatial structure, traffic dynamics, and missing-data patterns of
+a single road network. The conclusions cannot necessarily be generalized to
+other cities or sensor networks without additional evaluation.
+
+Second, the definition of distribution shift considered in this work focuses
+specifically on high-congestion periods. Although this represents a relevant
+and challenging traffic regime, other forms of shift may affect forecasting
+models differently, including sensor failures, changes in network topology,
+or temporal changes in traffic patterns.
+
+Third, the Graph-Temporal architecture is intentionally compact and explores
+only a limited set of spatial configurations. The diffusion-depth and
+adjacency ablations provide evidence about the role of graph information, but
+they do not constitute an exhaustive exploration of graph neural network
+architectures or graph construction strategies.
+
+Finally, CQR is calibrated globally for each forecasting horizon using the
+validation distribution. While this substantially improves marginal
+coverage, it does not explicitly account for traffic regime and therefore
+cannot guarantee the same calibration quality within the high-congestion
+subset. In addition, the temporal and spatial dependence present in traffic
+data makes the standard exchangeability assumptions underlying conformal
+prediction less directly applicable.
+
+
+\subsection{Future Improvements}
+\label{subsec:future_improvements}
+
+Several extensions could address these limitations. A first direction would
+be to evaluate the proposed congestion-aware training objective, assigning
+greater importance to rare congested targets during optimization and
+measuring whether this improves both point forecasts and uncertainty
+estimation without substantially degrading performance under normal
+conditions.
+
+The robustness analysis could also be extended to additional distribution
+shifts, such as partially masked sensor histories or simulated sensor
+failures. This would provide a broader characterization of the dependence of
+the Graph-Temporal model on spatial information and of its behavior when
+parts of the network become unavailable.
+
+Finally, future work could explore more expressive spatial and temporal
+architectures, alternative graph construction strategies, and dynamic graphs
+whose relationships evolve with traffic conditions. Evaluation on additional
+traffic datasets would also be necessary to determine whether the conclusions
+observed on METR-LA generalize to different road networks and traffic
+regimes.

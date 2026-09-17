@@ -1,0 +1,65 @@
+\section{Computational Cost and Accuracy-Reliability Trade-off}
+\label{sec:cost_tradeoff}
+
+The introduction of graph-based message passing improves forecasting accuracy,
+but also increases model complexity and computational cost.
+Table~\ref{tab:computational_cost} compares the Temporal model and the selected
+Graph-Temporal model in terms of number of trainable parameters and training
+time.
+
+\begin{table}[t]
+    \centering
+    \caption{Computational cost of the Temporal and Graph-Temporal models.}
+    \label{tab:computational_cost}
+    \begin{tabular}{lrr}
+        \toprule
+        Model & Trainable Parameters & Training Time (min) \\
+        \midrule
+        Temporal GRU   & 40164 & 14.3 \\
+        Graph-Temporal & 64868 & 34.0 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+As shown in Table~\ref{tab:computational_cost}, the Graph-Temporal model
+contains 64868 trainable parameters compared with 40164 for the Temporal
+model, corresponding to an increase of approximately 61.5\%. Training time also
+increases from approximately 14.3 to 34.0 minutes, making the Graph-Temporal
+model about 2.4 times more expensive to train in the considered experimental
+setting. This additional cost results from the diffusion operations and from
+the stacked graph-temporal blocks used to combine spatial and temporal
+information.
+
+The additional computational cost is accompanied by improved forecasting
+accuracy. As shown in Section~\ref{sec:in_distribution_results}, the
+Graph-Temporal model consistently outperforms the Temporal model in terms of
+MAE, RMSE, and Pinball Loss, with the improvement in point forecasting
+becoming more pronounced at longer horizons. It also produces sharper
+prediction intervals, although with slightly lower empirical coverage.
+Therefore, the accuracy gains provided by graph message passing come at the
+cost of both increased computation and mild undercoverage.
+
+Moreover, the stress-test analysis shows that this reliability gap becomes
+more important under high congestion. Although the Graph-Temporal model
+responds to difficult traffic conditions by producing wider intervals,
+coverage decreases to 75.8\% at the 60-minute horizon. The model therefore
+does not fully translate its increased uncertainty into reliable coverage
+under distribution shift.
+
+The CQR mitigation partially addresses this trade-off without increasing
+model complexity or requiring retraining. Post-hoc calibration brings overall
+coverage close to the nominal 80\% level while leaving the median point
+forecast unchanged. Nevertheless, the remaining undercoverage under
+high-congestion conditions shows that improved average calibration does not
+necessarily imply equally reliable uncertainty estimates across different
+traffic regimes.
+
+Overall, the Graph-Temporal architecture provides a clear accuracy advantage
+over the purely temporal baseline at the cost of greater computational
+complexity. Its probabilistic forecasts are generally sharper and more
+accurate in terms of quantile loss, but require additional calibration to
+approach the desired coverage. The results therefore highlight that model
+selection should consider not only point forecasting accuracy, but also
+computational cost and the reliability of predictive uncertainty,
+particularly under distribution shift.
+

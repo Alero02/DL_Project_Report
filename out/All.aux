@@ -1,0 +1,197 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{2}{section.1}\protected@file@percent }
+\newlabel{sec:introduction}{{1}{2}{Introduction}{section.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Objectives and Research Questions}{2}{subsection.1.1}\protected@file@percent }
+\newlabel{subsec:objectives}{{1.1}{2}{Objectives and Research Questions}{subsection.1.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Dataset and Preprocessing}{3}{section.2}\protected@file@percent }
+\newlabel{sec:data}{{2}{3}{Dataset and Preprocessing}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}METR-LA Dataset}{3}{subsection.2.1}\protected@file@percent }
+\newlabel{subsec:dataset}{{2.1}{3}{METR-LA Dataset}{subsection.2.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Exploratory Data Analysis}{3}{subsection.2.2}\protected@file@percent }
+\newlabel{subsec:eda}{{2.2}{3}{Exploratory Data Analysis}{subsection.2.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Mean traffic speed over time before (top) and after (bottom) excluding zero values. Removing zero-valued measurements eliminates the abrupt drops to zero while preserving the temporal traffic patterns.}}{4}{figure.caption.2}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:mean_speed_zero_comparison}{{1}{4}{Mean traffic speed over time before (top) and after (bottom) excluding zero values. Removing zero-valued measurements eliminates the abrupt drops to zero while preserving the temporal traffic patterns}{figure.caption.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Average traffic-speed profile by hour of the day, computed separately for weekdays and weekends. The different profiles highlight both daily and weekly temporal patterns in the METR-LA measurements.}}{4}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:temporal_patterns}{{2}{4}{Average traffic-speed profile by hour of the day, computed separately for weekdays and weekends. The different profiles highlight both daily and weekly temporal patterns in the METR-LA measurements}{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Leakage-Free Data Partitioning}{4}{subsection.2.3}\protected@file@percent }
+\newlabel{subsec:splitting}{{2.3}{4}{Leakage-Free Data Partitioning}{subsection.2.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Chronological partition of the original METR-LA time series before preprocessing and temporal window construction.}}{5}{table.caption.4}\protected@file@percent }
+\newlabel{tab:chronological_split}{{1}{5}{Chronological partition of the original METR-LA time series before preprocessing and temporal window construction}{table.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Missing-Value Handling}{5}{subsection.2.4}\protected@file@percent }
+\newlabel{subsec:missing}{{2.4}{5}{Missing-Value Handling}{subsection.2.4}{}}
+\@writefile{toc}{\contentsline {paragraph}{Input histories.}{5}{section*.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Forecasting targets.}{5}{section*.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Number of temporal samples retained after missing-data processing and filtering.}}{6}{table.caption.7}\protected@file@percent }
+\newlabel{tab:final_dataset}{{2}{6}{Number of temporal samples retained after missing-data processing and filtering}{table.caption.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Normalization and Temporal Windowing}{6}{subsection.2.5}\protected@file@percent }
+\newlabel{subsec:windowing}{{2.5}{6}{Normalization and Temporal Windowing}{subsection.2.5}{}}
+\newlabel{eq:normalization}{{1}{6}{Normalization and Temporal Windowing}{equation.1}{}}
+\newlabel{eq:input_window}{{2}{6}{Normalization and Temporal Windowing}{equation.2}{}}
+\newlabel{eq:target_window}{{3}{6}{Normalization and Temporal Windowing}{equation.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Forecasting Methodology}{6}{section.3}\protected@file@percent }
+\newlabel{sec:methodology}{{3}{6}{Forecasting Methodology}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Probabilistic Forecasting Formulation}{6}{subsection.3.1}\protected@file@percent }
+\newlabel{subsec:probabilistic}{{3.1}{6}{Probabilistic Forecasting Formulation}{subsection.3.1}{}}
+\newlabel{eq:quantiles}{{4}{7}{Probabilistic Forecasting Formulation}{equation.4}{}}
+\newlabel{eq:probabilistic_output}{{5}{7}{Probabilistic Forecasting Formulation}{equation.5}{}}
+\newlabel{eq:prediction_interval}{{6}{7}{Probabilistic Forecasting Formulation}{equation.6}{}}
+\newlabel{eq:pinball_loss}{{7}{7}{Probabilistic Forecasting Formulation}{equation.7}{}}
+\newlabel{eq:masked_pinball}{{8}{7}{Probabilistic Forecasting Formulation}{equation.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Persistence Baseline}{7}{subsection.3.2}\protected@file@percent }
+\newlabel{subsec:persistence}{{3.2}{7}{Persistence Baseline}{subsection.3.2}{}}
+\newlabel{eq:persistence}{{9}{7}{Persistence Baseline}{equation.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Temporal GRU}{7}{subsection.3.3}\protected@file@percent }
+\newlabel{subsec:gru}{{3.3}{7}{Temporal GRU}{subsection.3.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Graph Representation and Diffusion Message Passing}{8}{subsection.3.4}\protected@file@percent }
+\newlabel{subsec:graph}{{3.4}{8}{Graph Representation and Diffusion Message Passing}{subsection.3.4}{}}
+\newlabel{eq:row_normalization}{{13}{8}{Graph Representation and Diffusion Message Passing}{equation.13}{}}
+\newlabel{eq:graph_aggregation}{{15}{8}{Graph Representation and Diffusion Message Passing}{equation.15}{}}
+\newlabel{eq:diffusion}{{16}{8}{Graph Representation and Diffusion Message Passing}{equation.16}{}}
+\newlabel{eq:diffusion_k2}{{17}{8}{Graph Representation and Diffusion Message Passing}{equation.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Architecture of the proposed graph-temporal forecasting model.}}{9}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:graphtemporalarchitecture}{{3}{9}{Architecture of the proposed graph-temporal forecasting model}{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Graph-Temporal Architecture}{9}{subsection.3.5}\protected@file@percent }
+\newlabel{subsec:graph_temporal}{{3.5}{9}{Graph-Temporal Architecture}{subsection.3.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experimental Setup}{9}{section.4}\protected@file@percent }
+\newlabel{sec:experimental_setup}{{4}{9}{Experimental Setup}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Training Protocol}{9}{subsection.4.1}\protected@file@percent }
+\newlabel{subsec:training}{{4.1}{9}{Training Protocol}{subsection.4.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Hyperparameter search spaces and selected configurations for the two neural forecasting models.}}{10}{table.caption.9}\protected@file@percent }
+\newlabel{tab:hyperparameters}{{3}{10}{Hyperparameter search spaces and selected configurations for the two neural forecasting models}{table.caption.9}{}}
+\newlabel{fig:gru_learning_curve}{{4a}{10}{Temporal GRU}{figure.caption.10}{}}
+\newlabel{sub@fig:gru_learning_curve}{{a}{10}{Temporal GRU}{figure.caption.10}{}}
+\newlabel{fig:graph_learning_curve}{{4b}{10}{Graph-Temporal model}{figure.caption.10}{}}
+\newlabel{sub@fig:graph_learning_curve}{{b}{10}{Graph-Temporal model}{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Training and validation Pinball Loss for the selected model configurations.}}{10}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:learning_curves}{{4}{10}{Training and validation Pinball Loss for the selected model configurations}{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Hyperparameter Selection}{10}{subsection.4.2}\protected@file@percent }
+\newlabel{subsec:hyperparameters}{{4.2}{10}{Hyperparameter Selection}{subsection.4.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Evaluation Metrics}{11}{subsection.4.3}\protected@file@percent }
+\newlabel{subsec:metrics}{{4.3}{11}{Evaluation Metrics}{subsection.4.3}{}}
+\newlabel{eq:mae}{{18}{11}{Evaluation Metrics}{equation.18}{}}
+\newlabel{eq:rmse}{{19}{11}{Evaluation Metrics}{equation.19}{}}
+\newlabel{eq:coverage}{{20}{11}{Evaluation Metrics}{equation.20}{}}
+\newlabel{eq:interval_width}{{21}{11}{Evaluation Metrics}{equation.21}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Hardware and Reproducibility}{11}{subsection.4.4}\protected@file@percent }
+\newlabel{subsec:hardware}{{4.4}{11}{Hardware and Reproducibility}{subsection.4.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Point forecasting performance on the test set at the three forecasting horizons. The best result for each metric and horizon is highlighted in bold.}}{12}{table.caption.11}\protected@file@percent }
+\newlabel{tab:point_results}{{4}{12}{Point forecasting performance on the test set at the three forecasting horizons. The best result for each metric and horizon is highlighted in bold}{table.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Point forecasting performance of the Persistence, Temporal, and Graph-Temporal models across the three forecasting horizons in terms of MAE (left) and RMSE (right).}}{12}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:point_performance}{{5}{12}{Point forecasting performance of the Persistence, Temporal, and Graph-Temporal models across the three forecasting horizons in terms of MAE (left) and RMSE (right)}{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}In-Distribution Forecasting Results}{12}{section.5}\protected@file@percent }
+\newlabel{sec:in_distribution_results}{{5}{12}{In-Distribution Forecasting Results}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Point Forecasting Performance}{12}{subsection.5.1}\protected@file@percent }
+\newlabel{subsec:point_results}{{5.1}{12}{Point Forecasting Performance}{subsection.5.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Probabilistic Forecasting and Calibration}{12}{subsection.5.2}\protected@file@percent }
+\newlabel{subsec:probabilistic_results}{{5.2}{12}{Probabilistic Forecasting and Calibration}{subsection.5.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Probabilistic forecasting performance on the test set. Coverage refers to the nominal 80\% prediction interval defined by $q_{0.1}$ and $q_{0.9}$.}}{13}{table.caption.13}\protected@file@percent }
+\newlabel{tab:probabilistic_results}{{5}{13}{Probabilistic forecasting performance on the test set. Coverage refers to the nominal 80\% prediction interval defined by $q_{0.1}$ and $q_{0.9}$}{table.caption.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Comparison of the probabilistic forecasts produced by the Temporal GRU and Graph-Temporal models in terms of empirical coverage (left) and prediction interval width (right) across the three forecasting horizons. The dashed line in the coverage plot represents the nominal 80\% coverage level.}}{13}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:probabilistic_comparison}{{6}{13}{Comparison of the probabilistic forecasts produced by the Temporal GRU and Graph-Temporal models in terms of empirical coverage (left) and prediction interval width (right) across the three forecasting horizons. The dashed line in the coverage plot represents the nominal 80\% coverage level}{figure.caption.14}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Analysis of the Graph Component}{13}{section.6}\protected@file@percent }
+\newlabel{sec:graph_analysis}{{6}{13}{Analysis of the Graph Component}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}When Does the Graph Help?}{13}{subsection.6.1}\protected@file@percent }
+\newlabel{subsec:graph_effect}{{6.1}{13}{When Does the Graph Help?}{subsection.6.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Quantile calibration of the Temporal (left) and Graph-Temporal (right) models at the three forecasting horizons. The dashed diagonal represents perfect calibration.}}{14}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:quantile_calibration}{{7}{14}{Quantile calibration of the Temporal (left) and Graph-Temporal (right) models at the three forecasting horizons. The dashed diagonal represents perfect calibration}{figure.caption.15}{}}
+\newlabel{eq:delta_mae}{{23}{14}{When Does the Graph Help?}{equation.23}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Effect of Diffusion Depth}{14}{subsection.6.2}\protected@file@percent }
+\newlabel{subsec:diffusion_depth}{{6.2}{14}{Effect of Diffusion Depth}{subsection.6.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Representative forecasting examples in which the Graph-Temporal model improves over the Temporal GRU at the 15-minute (left), 30-minute (center), and 60-minute (right) forecasting horizons.}}{15}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:graph_help_examples}{{8}{15}{Representative forecasting examples in which the Graph-Temporal model improves over the Temporal GRU at the 15-minute (left), 30-minute (center), and 60-minute (right) forecasting horizons}{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Representative forecasting examples in which the Graph-Temporal model performs worse than the Temporal GRU at the 15-minute (left), 30-minute (center), and 60-minute (right) forecasting horizons.}}{16}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:graph_hurt_examples}{{9}{16}{Representative forecasting examples in which the Graph-Temporal model performs worse than the Temporal GRU at the 15-minute (left), 30-minute (center), and 60-minute (right) forecasting horizons}{figure.caption.17}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Graph Ablation: Weighted vs. Binary Adjacency}{16}{subsection.6.3}\protected@file@percent }
+\newlabel{subsec:weighted_binary}{{6.3}{16}{Graph Ablation: Weighted vs. Binary Adjacency}{subsection.6.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Test performance of the Graph-Temporal model with diffusion depths $K=2$ and $K=3$.}}{17}{table.caption.18}\protected@file@percent }
+\newlabel{tab:diffusion_depth}{{6}{17}{Test performance of the Graph-Temporal model with diffusion depths $K=2$ and $K=3$}{table.caption.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Comparison of the Graph-Temporal model with diffusion depths $K=2$ and $K=3$. The top row reports point forecasting performance in terms of MAE (left) and RMSE (right), while the bottom row reports empirical coverage (left) and prediction interval width (right) across the three forecasting horizons.}}{17}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:diffusion_depth_comparison}{{10}{17}{Comparison of the Graph-Temporal model with diffusion depths $K=2$ and $K=3$. The top row reports point forecasting performance in terms of MAE (left) and RMSE (right), while the bottom row reports empirical coverage (left) and prediction interval width (right) across the three forecasting horizons}{figure.caption.19}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Robustness under Distribution Shift}{17}{section.7}\protected@file@percent }
+\newlabel{sec:distribution_shift}{{7}{17}{Robustness under Distribution Shift}{section.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Test performance of the Graph-Temporal model using the weighted and binary adjacency matrices.}}{18}{table.caption.20}\protected@file@percent }
+\newlabel{tab:weighted_binary}{{7}{18}{Test performance of the Graph-Temporal model using the weighted and binary adjacency matrices}{table.caption.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Comparison of the Graph-Temporal model using the weighted and binary adjacency matrices. The top row reports point forecasting performance in terms of MAE (left) and RMSE (right), while the bottom row reports empirical coverage (left) and prediction interval width (right) across the three forecasting horizons.}}{18}{figure.caption.21}\protected@file@percent }
+\newlabel{fig:weighted_binary_comparison}{{11}{18}{Comparison of the Graph-Temporal model using the weighted and binary adjacency matrices. The top row reports point forecasting performance in terms of MAE (left) and RMSE (right), while the bottom row reports empirical coverage (left) and prediction interval width (right) across the three forecasting horizons}{figure.caption.21}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}High-Congestion Definition}{18}{subsection.7.1}\protected@file@percent }
+\newlabel{subsec:congestion_definition}{{7.1}{18}{High-Congestion Definition}{subsection.7.1}{}}
+\newlabel{eq:sensor_congestion_threshold}{{24}{18}{High-Congestion Definition}{equation.24}{}}
+\newlabel{eq:congestion_ratio}{{25}{18}{High-Congestion Definition}{equation.25}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Distribution of the network-level congestion ratio $C_t$ in the training set.}}{19}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:congestion_ratio_distribution}{{12}{19}{Distribution of the network-level congestion ratio $C_t$ in the training set}{figure.caption.22}{}}
+\newlabel{eq:peak_threshold}{{26}{19}{High-Congestion Definition}{equation.26}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Stress-Test Protocol}{19}{subsection.7.2}\protected@file@percent }
+\newlabel{subsec:stress_protocol}{{7.2}{19}{Stress-Test Protocol}{subsection.7.2}{}}
+\newlabel{eq:high_congestion_sample}{{27}{19}{Stress-Test Protocol}{equation.27}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Performance of the Graph-Temporal model under normal and high-congestion conditions on the test set.}}{20}{table.caption.23}\protected@file@percent }
+\newlabel{tab:congestion_results}{{8}{20}{Performance of the Graph-Temporal model under normal and high-congestion conditions on the test set}{table.caption.23}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Performance of the Graph-Temporal model under normal and high-congestion conditions. The top row compares MAE (left) and RMSE (right), while the bottom row reports empirical coverage (left) and prediction interval width (right) across the three forecasting horizons.}}{20}{figure.caption.24}\protected@file@percent }
+\newlabel{fig:congestion_performance}{{13}{20}{Performance of the Graph-Temporal model under normal and high-congestion conditions. The top row compares MAE (left) and RMSE (right), while the bottom row reports empirical coverage (left) and prediction interval width (right) across the three forecasting horizons}{figure.caption.24}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Quantitative Results}{20}{subsection.7.3}\protected@file@percent }
+\newlabel{subsec:shift_quantitative}{{7.3}{20}{Quantitative Results}{subsection.7.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Representative probabilistic forecasts produced by the Graph-Temporal model under normal (left) and high-congestion (right) conditions.}}{21}{figure.caption.25}\protected@file@percent }
+\newlabel{fig:shift_examples}{{14}{21}{Representative probabilistic forecasts produced by the Graph-Temporal model under normal (left) and high-congestion (right) conditions}{figure.caption.25}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Qualitative Analysis}{21}{subsection.7.4}\protected@file@percent }
+\newlabel{subsec:shift_qualitative}{{7.4}{21}{Qualitative Analysis}{subsection.7.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Mitigation Strategies}{22}{section.8}\protected@file@percent }
+\newlabel{sec:mitigation}{{8}{22}{Mitigation Strategies}{section.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Conformalized Quantile Regression}{22}{subsection.8.1}\protected@file@percent }
+\newlabel{subsec:cqr}{{8.1}{22}{Conformalized Quantile Regression}{subsection.8.1}{}}
+\newlabel{eq:cqr_score}{{28}{22}{Conformalized Quantile Regression}{equation.28}{}}
+\newlabel{eq:cqr_quantile_level}{{29}{22}{Conformalized Quantile Regression}{equation.29}{}}
+\newlabel{eq:cqr_correction}{{30}{22}{Conformalized Quantile Regression}{equation.30}{}}
+\newlabel{eq:cqr_interval}{{31}{22}{Conformalized Quantile Regression}{equation.31}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.1.1}Calibration Results}{22}{subsubsection.8.1.1}\protected@file@percent }
+\newlabel{subsubsec:cqr_results}{{8.1.1}{22}{Calibration Results}{subsubsection.8.1.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Empirical coverage before and after CQR calibration under overall, normal, and high-congestion test conditions.}}{23}{table.caption.26}\protected@file@percent }
+\newlabel{tab:cqr_results}{{9}{23}{Empirical coverage before and after CQR calibration under overall, normal, and high-congestion test conditions}{table.caption.26}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Effect of CQR calibration on empirical coverage (left) and prediction interval width (right) under overall, normal, and high-congestion conditions.}}{23}{figure.caption.27}\protected@file@percent }
+\newlabel{fig:cqr_results}{{15}{23}{Effect of CQR calibration on empirical coverage (left) and prediction interval width (right) under overall, normal, and high-congestion conditions}{figure.caption.27}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Congestion-Aware Training}{23}{subsection.8.2}\protected@file@percent }
+\newlabel{subsec:congestion_aware}{{8.2}{23}{Congestion-Aware Training}{subsection.8.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Computational cost of the Temporal and Graph-Temporal models.}}{24}{table.caption.28}\protected@file@percent }
+\newlabel{tab:computational_cost}{{10}{24}{Computational cost of the Temporal and Graph-Temporal models}{table.caption.28}{}}
+\newlabel{eq:congestion_weight}{{32}{24}{Congestion-Aware Training}{equation.32}{}}
+\newlabel{eq:weighted_pinball}{{33}{24}{Congestion-Aware Training}{equation.33}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Computational Cost and Accuracy-Reliability Trade-off}{24}{section.9}\protected@file@percent }
+\newlabel{sec:cost_tradeoff}{{9}{24}{Computational Cost and Accuracy-Reliability Trade-off}{section.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10}Discussion}{25}{section.10}\protected@file@percent }
+\newlabel{sec:discussion}{{10}{25}{Discussion}{section.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Main Findings}{25}{subsection.10.1}\protected@file@percent }
+\newlabel{subsec:main_findings}{{10.1}{25}{Main Findings}{subsection.10.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}Limitations}{25}{subsection.10.2}\protected@file@percent }
+\newlabel{subsec:limitations}{{10.2}{25}{Limitations}{subsection.10.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Future Improvements}{26}{subsection.10.3}\protected@file@percent }
+\newlabel{subsec:future_improvements}{{10.3}{26}{Future Improvements}{subsection.10.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11}Conclusion}{26}{section.11}\protected@file@percent }
+\newlabel{sec:conclusion}{{11}{26}{Conclusion}{section.11}{}}
+\@setckpt{All}{
+\setcounter{page}{27}
+\setcounter{equation}{33}
+\setcounter{enumi}{4}
+\setcounter{enumii}{0}
+\setcounter{enumiii}{0}
+\setcounter{enumiv}{0}
+\setcounter{footnote}{0}
+\setcounter{mpfootnote}{0}
+\setcounter{part}{0}
+\setcounter{section}{11}
+\setcounter{subsection}{0}
+\setcounter{subsubsection}{0}
+\setcounter{paragraph}{0}
+\setcounter{subparagraph}{0}
+\setcounter{figure}{15}
+\setcounter{table}{10}
+\setcounter{parentequation}{0}
+\setcounter{float@type}{4}
+\setcounter{section@level}{1}
+\setcounter{Item}{4}
+\setcounter{Hfootnote}{0}
+\setcounter{bookmark@seq@number}{41}
+\setcounter{caption@flags}{2}
+\setcounter{continuedfloat}{0}
+\setcounter{subfigure}{0}
+\setcounter{subtable}{0}
+}

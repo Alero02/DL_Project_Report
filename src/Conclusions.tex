@@ -1,0 +1,41 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+This work investigated probabilistic graph-based traffic forecasting under
+distribution shift using the METR-LA dataset. A leakage-free experimental
+pipeline was developed to compare a persistence baseline, a purely temporal
+GRU, and a Graph-Temporal model combining diffusion-based message passing with
+recurrent temporal modeling. In addition to point forecasting accuracy, the
+analysis considered predictive uncertainty through quantile regression,
+empirical coverage, and prediction interval width.
+
+The experimental results show that incorporating the road-network graph
+consistently improves forecasting accuracy over the Temporal model,
+particularly at longer forecasting horizons. The graph ablations further
+indicate that the weighted connectivity structure contains useful predictive
+information, while increasing the diffusion depth provides only limited
+additional benefits. These improvements, however, come with higher
+computational cost and slightly reduced empirical coverage.
+
+The high-congestion stress test reveals a more challenging limitation.
+During congested periods, forecasting errors increase substantially and the
+model responds by producing wider prediction intervals. Nevertheless,
+coverage deteriorates at longer horizons, showing that increased uncertainty
+does not necessarily translate into reliable uncertainty estimates under
+distribution shift.
+
+Post-hoc calibration through Conformalized Quantile Regression substantially
+improves overall coverage and brings it close to the nominal 80\% level
+without modifying the median forecasts or retraining the model. However, the
+remaining undercoverage under high congestion shows that marginal calibration
+alone is insufficient to fully address regime-specific reliability. A
+congestion-aware training objective was therefore proposed as a possible
+extension to explicitly increase the importance of these rare and difficult
+traffic conditions during learning.
+
+Overall, the results demonstrate the value of exploiting spatial information
+for traffic forecasting while also highlighting the importance of evaluating
+predictive uncertainty beyond average test performance. Reliable deployment
+requires considering not only forecasting accuracy, but also calibration,
+robustness to distribution shift, and the computational cost associated with
+more expressive spatio-temporal models.

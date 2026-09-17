@@ -1,0 +1,80 @@
+\documentclass{article}
+
+% Language and formatting
+\usepackage[english]{babel}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=black]{hyperref}
+\usepackage[font=small,labelfont=bf]{caption}
+\setlength{\parindent}{0pt}
+
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{siunitx}
+\usepackage{subcaption}
+
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+
+% Logo del Politecnico
+\includegraphics[width=4cm]{img/logo_poliba} \\[1cm]
+
+\textsc{\Large \textbf{POLITECNICO DI BARI}} \\[0.3cm]
+\textsc{Department of electical and information engineering} \\[0.3cm]
+\textbf{Master Degree in Computer Engineering} \\[0.3cm]
+
+\rule{\textwidth}{0.4pt} \\[1cm]
+
+\textit{Project for the course} \\[0.2cm]
+{\large \textbf{Deep Learning}} \\[2cm]
+
+% Titolo del progetto
+{\LARGE \textbf{Graph Traffic Forecasting under \\Distribution Shift}} \\[2.5cm]
+
+\begin{minipage}{0.45\textwidth}
+\raggedright
+\textbf{Professor} \\[0.2cm]
+Prof. Vito Walter Anelli
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\raggedleft
+\textbf{Student} \\[0.2cm]
+Alessandra Roberto \\
+\texttt{a.roberto7@studenti.poliba.it}
+\end{minipage}
+
+\vfill
+\rule{\textwidth}{0.4pt} \\[0.3cm]
+Academic Year 2025/2026
+
+\end{center}
+\end{titlepage}
+
+
+\tableofcontents
+\newpage
+
+%\addcontentsline{toc}{section}
+
+%\include{Introduction}
+%\include{DatasetPreprocessing}
+%\include{ForecastingMethodology}
+%\include{ExperimentalSetup}
+%\include{InDistributionForecastingResults}
+%\include{GraphComponent}
+%\include{DistributionShift}
+%\include{Mitigation}
+%\include{CostTradeOff}
+%\include{Discussions}
+%\include{Conclusions}
+
+\include{All}
+
+\end{document}

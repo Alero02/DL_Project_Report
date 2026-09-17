@@ -1,0 +1,56 @@
+\section*{Introduction}
+
+Accurate short-term knowledge of traffic conditions is essential for understanding and managing the dynamics of urban road networks.
+However, traffic evolution is difficult to predict because it results from the interaction of two strongly coupled components.
+On the one hand, traffic at a given location follows temporal patterns determined by its recent history; on the other hand,
+changes occurring on one road segment can propagate through the network and affect other connected locations.
+A forecasting model should therefore be able to exploit both temporal dependencies and the spatial structure of the road network.
+
+An additional challenge arises from the fact that prediction quality is not uniform across operating conditions.
+Models trained predominantly on regular traffic patterns may behave differently when confronted with less common situations,
+such as widespread congestion.
+In this context, evaluating only the average prediction error provides an incomplete picture of model performance.
+A useful forecasting system should also provide an indication of its uncertainty and, importantly, this uncertainty
+should remain informative when the input distribution differs from the conditions most frequently observed during training.
+
+
+This project investigates graph-based probabilistic traffic forecasting under distribution shift using the METR-LA dataset,
+which contains traffic-speed measurements collected from 207 sensors in the Los Angeles road network.
+The forecasting problem is formulated using leakage-free temporal windows, with 12 historical observations used to predict
+the following 12 time steps.
+Performance is evaluated at three representative forecasting horizons: 15, 30, and 60 minutes ahead.
+A chronological train-validation-test split is adopted throughout the experimental pipeline to preserve the temporal
+structure of the data and prevent information leakage.
+
+
+The study follows a progressive modeling approach.
+A simple persistence baseline is first established as a reference for point forecasting performance.
+A GRU-based temporal model without graph message passing is then introduced to capture temporal dependencies independently
+for each sensor.
+The main architecture extends this formulation with diffusion-based graph message passing, allowing information to
+propagate across the road network before being processed by the recurrent temporal component.
+Rather than producing only deterministic forecasts, both learned models estimate the 0.1, 0.5, and 0.9 conditional
+quantiles through masked pinball loss, enabling the construction of predictive intervals and the joint evaluation of
+accuracy and uncertainty.
+
+
+Particular attention is devoted to understanding the contribution of the graph rather than considering it an inherently
+beneficial architectural component.
+The graph-temporal model is therefore compared with its no-graph counterpart and analyzed through architectural variants
+and graph ablations, including different diffusion depths and weighted versus binarized adjacency.
+The analysis further examines individual sensors and forecasting windows to identify conditions in which spatial message
+passing improves or degrades predictions, and relates these effects to properties of the underlying graph topology.
+Computational cost and model complexity are also considered alongside predictive performance and reliability.
+
+
+Finally, the robustness of the forecasting system is evaluated under a predefined distribution shift based on high-congestion periods.
+Congestion is identified using thresholds derived exclusively from the training data, allowing normal and stressed test
+conditions to be compared without introducing test-set information into the shift definition.
+Changes in point errors, prediction-interval coverage, interval width, and calibration are analyzed across forecasting horizons.
+A calibration-oriented mitigation strategy is subsequently evaluated, together with an additional proposed approach for
+improving robustness under congestion.
+Overall, the project aims not only to determine how accurately the models forecast traffic, but also to investigate when
+spatial information is useful, how uncertainty behaves when traffic conditions shift, and whether the resulting confidence
+estimates remain reliable under challenging operating conditions.
+
+
