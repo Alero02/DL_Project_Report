@@ -1,0 +1,22 @@
+\begin{thebibliography}{1}
+
+\bibitem{li2018dcrnn}
+Yaguang Li, Rose Yu, Cyrus Shahabi, and Yan Liu.
+\newblock Diffusion convolutional recurrent neural network: Data-driven traffic
+  forecasting.
+\newblock In {\em International Conference on Learning Representations}, 2018.
+
+\bibitem{romano2019cqr}
+Yaniv Romano, Evan Patterson, and Emmanuel~J. Cand{\`e}s.
+\newblock Conformalized quantile regression.
+\newblock In {\em Advances in Neural Information Processing Systems},
+  volume~32, 2019.
+
+\bibitem{zhang2025casaformer}
+Yifan Zhang, Qishen Zhou, Jianping Wang, Anastasios Kouvelas, and Michail~A.
+  Makridis.
+\newblock Casaformer: Congestion-aware sparse attention transformer for traffic
+  speed prediction.
+\newblock {\em Communications in Transportation Research}, 5:100174, 2025.
+
+\end{thebibliography}

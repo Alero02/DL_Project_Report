@@ -5,15 +5,15 @@
 \contentsline {subsection}{\numberline {2.1}METR-LA Dataset}{3}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Exploratory Data Analysis}{3}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Leakage-Free Data Partitioning}{4}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Missing-Value Handling}{5}{subsection.2.4}%
-\contentsline {paragraph}{Input histories.}{5}{section*.5}%
-\contentsline {paragraph}{Forecasting targets.}{5}{section*.6}%
-\contentsline {subsection}{\numberline {2.5}Normalization and Temporal Windowing}{6}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.4}Normalization and Temporal Windowing}{5}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Missing-Value Handling}{6}{subsection.2.5}%
+\contentsline {paragraph}{Input histories.}{6}{section*.5}%
+\contentsline {paragraph}{Forecasting targets.}{6}{section*.6}%
 \contentsline {section}{\numberline {3}Forecasting Methodology}{6}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Probabilistic Forecasting Formulation}{6}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Persistence Baseline}{7}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Temporal GRU}{7}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Graph Representation and Diffusion Message Passing}{8}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.4}Graph Representation and Diffusion-Style Message Passing}{8}{subsection.3.4}%
 \contentsline {subsection}{\numberline {3.5}Graph-Temporal Architecture}{9}{subsection.3.5}%
 \contentsline {section}{\numberline {4}Experimental Setup}{9}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Training Protocol}{9}{subsection.4.1}%
@@ -27,15 +27,15 @@
 \contentsline {subsection}{\numberline {6.1}When Does the Graph Help?}{13}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}Effect of Diffusion Depth}{14}{subsection.6.2}%
 \contentsline {subsection}{\numberline {6.3}Graph Ablation: Weighted vs. Binary Adjacency}{16}{subsection.6.3}%
-\contentsline {section}{\numberline {7}Robustness under Distribution Shift}{17}{section.7}%
+\contentsline {section}{\numberline {7}Robustness under Distribution Shift}{18}{section.7}%
 \contentsline {subsection}{\numberline {7.1}High-Congestion Definition}{18}{subsection.7.1}%
 \contentsline {subsection}{\numberline {7.2}Stress-Test Protocol}{19}{subsection.7.2}%
 \contentsline {subsection}{\numberline {7.3}Quantitative Results}{20}{subsection.7.3}%
 \contentsline {subsection}{\numberline {7.4}Qualitative Analysis}{21}{subsection.7.4}%
 \contentsline {section}{\numberline {8}Mitigation Strategies}{22}{section.8}%
 \contentsline {subsection}{\numberline {8.1}Conformalized Quantile Regression}{22}{subsection.8.1}%
-\contentsline {subsubsection}{\numberline {8.1.1}Calibration Results}{22}{subsubsection.8.1.1}%
-\contentsline {subsection}{\numberline {8.2}Congestion-Aware Training}{23}{subsection.8.2}%
+\contentsline {subsubsection}{\numberline {8.1.1}Calibration Results}{23}{subsubsection.8.1.1}%
+\contentsline {subsection}{\numberline {8.2}Congestion-Aware Training}{24}{subsection.8.2}%
 \contentsline {section}{\numberline {9}Computational Cost and Accuracy-Reliability Trade-off}{24}{section.9}%
 \contentsline {section}{\numberline {10}Discussion}{25}{section.10}%
 \contentsline {subsection}{\numberline {10.1}Main Findings}{25}{subsection.10.1}%

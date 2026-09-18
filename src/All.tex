@@ -101,15 +101,16 @@ estimates remain reliable under distribution shift.
 The experiments were conducted on the METR-LA dataset, which contains
 traffic-speed measurements collected from 207 loop detectors located on the
 Los Angeles County road network. Measurements are sampled every five minutes,
-resulting in 34,272 timestamps covering the period from March 1 to June 27,
+resulting in 34272 timestamps covering the period from March 1 to June 27,
 2012. Each sensor is associated with a single feature representing the
 observed traffic speed.
 
 The dataset can therefore be represented as a multivariate time series
-$\mathbf{X} \in \mathbb{R}^{T \times N}$, where $T=34{,}272$ denotes the
-number of timestamps and $N=207$ the number of traffic sensors. The spatial
-relationships between sensors are represented by the graph provided with the
-dataset. Its adjacency matrix $\mathbf{A} \in \mathbb{R}^{N \times N}$ is
+$\mathbf{X} \in \mathbb{R}^{T \times N}$, where $T=34272$ denotes the
+number of timestamps and $N=207$ the number of traffic sensors.
+The spatial relationships between sensors are represented by the road-network
+graph released with the public DCRNN implementation for METR-LA
+\citep{li2018dcrnn}. Its adjacency matrix $\mathbf{A} \in \mathbb{R}^{N \times N}$ is
 directed and weighted and is later used by the graph-temporal model for
 spatial message passing. A detailed description of the graph construction and
 normalization is provided in Section~\ref{subsec:graph}.
@@ -169,11 +170,11 @@ and increasing again during less congested hours. However, aggregating all
 days together partially hides differences between working days and weekends.
 
 Figure~\ref{fig:temporal_patterns} therefore compares the hourly traffic-speed
-profiles obtained separately for weekdays and weekends. Weekdays exhibit more
-pronounced reductions in average speed during the morning and especially
-during the afternoon and evening, whereas weekends show a smoother profile
-with generally higher speeds during the corresponding periods. The figure
-therefore reveals a weekly component in addition to the daily seasonality.
+profiles obtained separately for weekdays and weekends.
+Weekdays exhibit two pronounced reductions in average speed, occurring around
+8:00 and 17:00 and corresponding to the typical morning and afternoon commuting periods.
+In contrast, weekends show a smoother daily profile, with generally higher speeds during these hours.
+The figure therefore reveals a weekly component in addition to the daily seasonality.
 
 These observations confirm that the traffic series contains meaningful
 temporal dependencies at multiple time scales and motivate the use of a
@@ -213,7 +214,7 @@ heterogeneous temporal traffic patterns across the sensor network.
 To preserve the temporal nature of the forecasting problem and prevent
 information leakage, the original time series was partitioned
 chronologically, without shuffling, into training, validation, and test sets
-using a 70\%--10\%--20\% split. Importantly, the partition was performed on
+using a 70\%-10\%-20\% split. Importantly, the partition was performed on
 the raw time series before normalization and temporal window construction.
 
 The resulting partitions are summarized in
@@ -251,98 +252,6 @@ Consequently, an input--target pair can never cross a split boundary. For
 example, a training input window cannot use observations from the validation
 period as future targets. This procedure preserves the chronological
 separation between model development and final evaluation.
-
-
-
-\subsection{Missing-Value Handling}
-\label{subsec:missing}
-
-Based on the exploratory analysis in
-Section~\ref{subsec:eda}, zero-valued traffic measurements were interpreted
-as unavailable observations and replaced with missing values before further
-processing. Missing values were then handled differently in the input
-history and in the forecasting targets, since imputing a target would create
-artificial ground-truth values and could bias both training and evaluation.
-
-\paragraph{Input histories.}
-
-Missing observations in the input history were first handled through a
-limited interpolation procedure. For each sensor independently, only short
-internal gaps of at most three consecutive timestamps were interpolated, and
-only when valid observations were available on both sides of the gap. Longer
-gaps and missing values at the boundaries of an input window were left
-unchanged.
-
-This conservative strategy reduces isolated sensor dropouts while avoiding
-the reconstruction of long unavailable periods from potentially unrelated
-observations. Before interpolation, missing values accounted for
-approximately 7.13\%, 7.00\%, and 12.13\% of the input values in the
-training, validation, and test windows, respectively. After short-gap
-interpolation, these proportions decreased to approximately 6.85\%, 6.83\%,
-and 11.92\%.
-
-Therefore, interpolation only
-moderately reduces the overall amount of missing data. This is expected
-because the procedure deliberately targets short internal gaps while
-preserving longer periods of sensor unavailability.
-
-Input windows for which all sensors were unavailable throughout the complete
-history were removed, since they contain no temporal information from which a
-forecast can be produced. In contrast, a window was retained when only a
-subset of sensors was fully unavailable, because observations from the
-remaining sensors may still provide useful information, particularly for the
-graph-temporal model.
-
-After this filtering step, residual missing input values were replaced by
-zero in the standardized domain. Since normalization is performed separately
-for each sensor using training statistics, this value corresponds to the
-training mean of that sensor rather than to a physical traffic speed of zero.
-An input availability mask was retained to distinguish observed from missing
-measurements.
-
-\paragraph{Forecasting targets.}
-
-A stricter policy was adopted for the forecasting targets. Target values were
-never interpolated or semantically imputed, since doing so would introduce
-synthetic ground truth into the optimization and evaluation procedures.
-Instead, a binary target-availability mask was constructed and propagated
-throughout the complete pipeline.
-
-Windows with no valid target observations over the complete forecasting
-period were removed. Partially observed target windows were retained, while
-missing target entries were numerically replaced with finite placeholder
-values only to maintain valid tensor representations. These entries were
-always excluded from the loss and evaluation metrics through the target
-mask and therefore never contributed to model optimization or reported
-performance.
-
-After filtering fully unavailable input and target windows, the final dataset
-contains 22817 training samples, 3240 validation samples, and 6224 test
-samples, as reported in Table~\ref{tab:final_dataset}. Despite the missing
-periods identified in the raw data, target availability remains above 94\%
-at all evaluated horizons, providing a sufficiently large set of valid
-observations for model training and evaluation.
-
-\begin{table}[t]
-    \centering
-    \caption{Number of temporal samples retained after missing-data
-    processing and filtering.}
-    \label{tab:final_dataset}
-    \begin{tabular}{lr}
-        \toprule
-        Split & Final samples \\
-        \midrule
-        Training   & 22817 \\
-        Validation & 3240 \\
-        Test       & 6224 \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
-Target availability nevertheless remains high at all evaluated horizons,
-ranging from approximately 94\% to 97\% depending on the split and forecast
-horizon.
-
 
 \subsection{Normalization and Temporal Windowing}
 \label{subsec:windowing}
@@ -430,10 +339,100 @@ model optimization or performance evaluation.
 The resulting preprocessing pipeline therefore preserves the chronological
 structure of the forecasting problem, estimates all data-dependent
 transformations exclusively from the training period, and explicitly tracks
-unavailable observations through masks. The same processed input--target
+unavailable observations through masks. The same processed input-target
 windows are used by all forecasting approaches described in the following
 section, ensuring that differences in performance are attributable to the
 forecasting models rather than to different data-processing procedures.
+
+
+\subsection{Missing-Value Handling}
+\label{subsec:missing}
+
+Based on the exploratory analysis in
+Section~\ref{subsec:eda}, zero-valued traffic measurements were interpreted
+as unavailable observations and replaced with missing values before further
+processing.
+After normalization and temporal window construction, missing values were
+handled differently in the input histories X and forecasting targets Y,
+since imputing a target would create
+artificial ground-truth values and could bias both training and evaluation.
+
+\paragraph{Input histories.}
+
+Missing observations in each input window were handled through a limited interpolation procedure.
+For each sensor independently, only short
+internal gaps of at most three consecutive timestamps were interpolated, and
+only when valid observations were available on both sides of the gap. Longer
+gaps and missing values at the boundaries of an input window were left
+unchanged.
+
+This conservative strategy reduces isolated sensor dropouts while avoiding
+the reconstruction of long unavailable periods from potentially unrelated
+observations. Before interpolation, missing values accounted for
+approximately 7.13\%, 7.00\%, and 12.13\% of the input values in the
+training, validation, and test windows, respectively. After short-gap
+interpolation, these proportions decreased to approximately 6.85\%, 6.83\%,
+and 11.92\%.
+
+Therefore, interpolation only
+moderately reduces the overall amount of missing data. This is expected
+because the procedure deliberately targets short internal gaps while
+preserving longer periods of sensor unavailability.
+
+Input windows for which all sensors were unavailable throughout the complete
+history were removed, since they contain no temporal information from which a
+forecast can be produced. In contrast, a window was retained when only a
+subset of sensors was fully unavailable, because observations from the
+remaining sensors may still provide useful information, particularly for the
+graph-temporal model.
+
+After this filtering step, residual missing input values were replaced by
+zero in the standardized domain. Since normalization is performed separately
+for each sensor using training statistics, this value corresponds to the
+training mean of that sensor rather than to a physical traffic speed of zero.
+An input availability mask was retained to distinguish observed from missing
+measurements.
+
+\paragraph{Forecasting targets.}
+
+A stricter policy was adopted for the forecasting targets. Target values were
+never interpolated or semantically imputed, since doing so would introduce
+synthetic ground truth into the optimization and evaluation procedures.
+Instead, a binary target-availability mask was constructed and propagated
+throughout the complete pipeline.
+
+Windows with no valid target observations over the complete forecasting
+period were removed. Partially observed target windows were retained, while
+missing target entries were numerically replaced with finite placeholder
+values only to maintain valid tensor representations. These entries were
+always excluded from the loss and evaluation metrics through the target
+mask and therefore never contributed to model optimization or reported
+performance.
+
+After filtering fully unavailable input and target windows, the final dataset
+contains 22817 training samples, 3240 validation samples, and 6224 test
+samples, as reported in Table~\ref{tab:final_dataset}.
+
+\begin{table}[t]
+    \centering
+    \caption{Number of temporal samples retained after missing-data
+    processing and filtering.}
+    \label{tab:final_dataset}
+    \begin{tabular}{lr}
+        \toprule
+        Split & Final samples \\
+        \midrule
+        Training   & 22817 \\
+        Validation & 3240 \\
+        Test       & 6224 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+Despite the missing periods identified in the raw data,
+target availability remains high at all evaluated horizons,
+ranging from approximately 95\% to 97\% depending on the split and forecast
+horizon, providing a sufficiently large set of valid
+observations for model training and evaluation.
 
 
 \section{Forecasting Methodology}
@@ -571,8 +570,9 @@ sequence.
 \subsection{Temporal GRU}
 \label{subsec:gru}
 
-The first learned forecasting model is a temporal GRU designed to capture
-temporal dependencies without exploiting the sensor graph. Each sensor is
+The first learned forecasting model is a temporal Gated Recurrent Unit
+(GRU), which serves as the no-graph baseline.
+Each sensor is
 processed independently using its own sequence of historical traffic
 observations, while the GRU parameters are shared across all sensors.
 
@@ -608,11 +608,11 @@ network is applied to every sensor, the parameter count does not scale with
 the number of nodes in the traffic network.
 
 
-\subsection{Graph Representation and Diffusion Message Passing}
+\subsection{Graph Representation and Diffusion-Style Message Passing}
 \label{subsec:graph}
 
 Spatial dependencies are introduced through the sensor graph provided with
-METR-LA. Each traffic sensor corresponds to a graph node, while the adjacency
+METR-LA \citep{li2018dcrnn}. Each traffic sensor corresponds to a graph node, while the adjacency
 matrix
 
 \begin{equation}
@@ -655,8 +655,14 @@ $i$ is therefore
 so that node $i$ receives a weighted combination of the representations of
 the nodes $j$ connected to it.
 
-Spatial information is propagated through a diffusion-style message-passing
-layer. Given node features $\mathbf{X}$, the layer computes
+Spatial information is incorporated through a diffusion-style message-passing
+layer, conceptually inspired by diffusion-based graph modeling for traffic
+forecasting \citep{li2018dcrnn}.
+This formulation implements a compact unidirectional multi-hop propagation
+operator rather than the bidirectional diffusion convolution of DCRNN.
+Only powers of the row-normalized propagation matrix PP are considered,
+with a separate learnable transformation $W_k$ for each propagation depth.
+Given node features $\mathbf{X}$, the layer computes
 
 \begin{equation}
     \mathbf{H}
@@ -700,10 +706,11 @@ self-information.
 \subsection{Graph-Temporal Architecture}
 \label{subsec:graph_temporal}
 
-The main forecasting model combines the diffusion operation described in
+The main forecasting model combines the diffusion-style message-passing operation
+described in
 Section~\ref{subsec:graph} with recurrent temporal modeling. The architecture
 is composed of two consecutive graph-temporal blocks. Each block first
-propagates information between sensors through diffusion message passing and
+propagates information between sensors through diffusion-style message passing and
 then applies a GRU to model the temporal evolution of the resulting node
 representations (Figure \ref{fig:graphtemporalarchitecture}).
 
@@ -800,7 +807,7 @@ graph-temporal blocks were kept fixed during the main hyperparameter search;
 the effect of changing the diffusion depth is investigated separately in
 Section~\ref{subsec:diffusion_depth}.
 
-For the Temporal GRU, the selected configuration uses a hidden dimension of
+For the Temporal model, the selected configuration uses a hidden dimension of
 64, two recurrent layers, and a learning rate of $5\times10^{-4}$. The best
 checkpoint was obtained at epoch 78, with a validation Pinball Loss of
 0.1240.
@@ -826,7 +833,7 @@ Section~\ref{subsec:training}.
     \begin{subfigure}[b]{0.48\linewidth}
         \centering
         \includegraphics[width=\linewidth]{img/temporal_gru/learning_curves}
-        \caption{Temporal GRU.}
+        \caption{Temporal model.}
         \label{fig:gru_learning_curve}
     \end{subfigure}
     \hfill
@@ -1027,7 +1034,7 @@ that cannot be captured by simply propagating the final input value into the
 future.
 
 The Graph-Temporal model further reduces both MAE and RMSE at every horizon.
-Compared with the Temporal GRU, the MAE decreases from 3.080 to 2.901 at
+Compared with the Temporal model, the MAE decreases from 3.080 to 2.901 at
 15 minutes, from 3.735 to 3.442 at 30 minutes, and from 4.733 to 4.244 at
 60 minutes. These correspond to relative reductions of approximately
 5.8\%, 7.8\%, and 10.3\%, respectively. The corresponding RMSE reductions
@@ -1043,7 +1050,7 @@ effective in reducing larger forecasting errors.
 
 The same trend is illustrated in
 Figure~\ref{fig:point_performance}, where the performance gap between the
-Temporal GRU and the Graph-Temporal model becomes progressively larger toward
+Temporal model and the Graph-Temporal model becomes progressively larger toward
 the 60-minute horizon.
 
 \begin{figure}[t]
@@ -1086,7 +1093,7 @@ median forecast, but also extends to the estimation of the lower and upper
 quantiles.
 
 The two models, however, exhibit a different trade-off between calibration
-and sharpness. The Temporal GRU achieves empirical coverage close to the
+and sharpness. The Temporal model achieves empirical coverage close to the
 nominal 80\% level, with values of 81.30\%, 80.16\%, and 79.81\% at 15,
 30, and 60 minutes, respectively. The Graph-Temporal model produces narrower
 prediction intervals at every horizon, reducing the average interval width
@@ -1098,10 +1105,10 @@ the three horizons.
 These results show that the Graph-Temporal model improves the quality of all
 three estimated quantiles and produces more concentrated predictive
 intervals, but the resulting intervals exhibit mild undercoverage relative
-to the nominal 80\% level. In contrast, the Temporal GRU remains closer to
+to the nominal 80\% level. In contrast, the Temporal model remains closer to
 the nominal coverage overall, although it exhibits mild overcoverage at the
 15-minute horizon, reaching 81.30\%.
-The reliability--sharpness trade-off is further illustrated in
+The reliability-sharpness trade-off is further illustrated in
 Figure~\ref{fig:probabilistic_comparison}.
 Moreover, interval width increases with the
 forecasting horizon for both models, reflecting the greater uncertainty of
@@ -1221,7 +1228,7 @@ and that of the Graph-Temporal model,
 
 A positive value of $\Delta \mathrm{MAE}_{n,h}$ therefore indicates that
 incorporating graph information reduces the forecasting error for sensor
-$n$, whereas a negative value indicates that the Temporal GRU performs
+$n$, whereas a negative value indicates that the Temporal model performs
 better for that sensor.
 
 The sensor-level comparison shows that the aggregate improvement is not
@@ -1235,41 +1242,9 @@ benefit more from purely temporal modeling.
 
 To complement the sensor-level aggregate analysis, representative forecasting
 examples are examined in Figure~\ref{fig:graph_help_examples}. The examples
-compare the predictions of the Temporal GRU and Graph-Temporal model for
+compare the predictions of the Temporal and Graph-Temporal models for
 sensor-time pairs in which the inclusion of spatial information produces a
 clear reduction in forecasting error.
-
-\begin{figure}[t]
-    \centering
-
-    \begin{minipage}[b]{0.8\linewidth}
-        \centering
-        \includegraphics[width=\linewidth]{img/graph_impact_analysis/graph_helps_h3_sensor_764858}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.8\linewidth}
-        \centering
-        \includegraphics[width=\linewidth]{img/graph_impact_analysis/graph_helps_h6_sensor_717461}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.8\linewidth}
-        \centering
-        \includegraphics[width=\linewidth]{img/graph_impact_analysis/graph_helps_h12_sensor_717458}
-    \end{minipage}
-
-    \caption{Representative forecasting examples in which the Graph-Temporal
-    model improves over the Temporal GRU at the 15-minute (left), 30-minute
-    (center), and 60-minute (right) forecasting horizons.}
-    \label{fig:graph_help_examples}
-\end{figure}
-
-
-Figure~\ref{fig:graph_hurt_examples} instead reports representative cases in
-which graph message passing increases the forecasting error. These examples
-are particularly useful because they show that neighboring information is
-not always informative for the future evolution of a given sensor. The
-presence of such cases motivates a more detailed investigation of whether the
-benefit of graph message passing can be related to the local graph structure.
 
 \begin{figure}[t]
     \centering
@@ -1290,13 +1265,45 @@ benefit of graph message passing can be related to the local graph structure.
     \end{minipage}
 
     \caption{Representative forecasting examples in which the Graph-Temporal
-model performs worse than the Temporal GRU at the 15-minute (left), 30-minute
-(center), and 60-minute (right) forecasting horizons.}
+model performs worse than the Temporal model at the 15-minute (top), 30-minute
+(center), and 60-minute (bottom) forecasting horizons.}
     \label{fig:graph_hurt_examples}
 \end{figure}
 
+
+Figure~\ref{fig:graph_hurt_examples} instead reports representative cases in
+which graph message passing increases the forecasting error. These examples
+are particularly useful because they show that neighboring information is
+not always informative for the future evolution of a given sensor. The
+presence of such cases motivates a more detailed investigation of whether the
+benefit of graph message passing can be related to the local graph structure.
+
+\begin{figure}[t]
+    \centering
+
+    \begin{minipage}[b]{0.8\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/graph_impact_analysis/graph_helps_h3_sensor_764858}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.8\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/graph_impact_analysis/graph_helps_h6_sensor_717461}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.8\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/graph_impact_analysis/graph_helps_h12_sensor_717458}
+    \end{minipage}
+
+    \caption{Representative forecasting examples in which the Graph-Temporal
+    model improves over the Temporal GRU at the 15-minute (top), 30-minute
+    (center), and 60-minute (bottom) forecasting horizons.}
+    \label{fig:graph_help_examples}
+\end{figure}
+
 Overall, these examples confirm that the effect of graph message passing is
-sensor- and time-dependent. Although spatial information improves forecasting
+sensor and time dependent. Although spatial information improves forecasting
 accuracy for the large majority of sensors, it can occasionally introduce
 information that does not improve the local prediction. This observation is
 consistent with the small subset of sensors for which the Temporal GRU
@@ -1306,7 +1313,8 @@ achieves lower MAE.
 \label{subsec:diffusion_depth}
 
 The main Graph-Temporal model uses a diffusion depth of $K=2$, allowing each
-diffusion layer to combine information from the current node and from nodes
+diffusion-style message-passing layer
+ to combine information from the current node and from nodes
 reached through one and two-step propagation. To investigate whether a
 larger spatial receptive field provides additional benefits, a variant with
 $K=3$ was trained while keeping the remaining model configuration unchanged.
@@ -1326,18 +1334,20 @@ sensitivity to larger forecasting errors.
     depths $K=2$ and $K=3$.}
     \label{tab:diffusion_depth}
     \resizebox{\linewidth}{!}{
-    \begin{tabular}{ccrrrrr}
+    \begin{tabular}{ccrrrrrrrrrr}
         \toprule
         $K$ & Horizon &
-        MAE & RMSE & Coverage (\%) & Interval Width & Crossing (\%) \\
+        MAE & RMSE &
+        Pinball$_{0.1}$ & Pinball$_{0.5}$ & Pinball$_{0.9}$ &
+        Coverage (\%) & Interval Width & Crossing (\%) \\
         \midrule
-        2 & 15 min & 2.901 & 5.511 & 78.44 & 8.929  & 0.031 \\
-        2 & 30 min & 3.442 & 6.758 & 78.22 & 10.485 & 0.029 \\
-        2 & 60 min & 4.244 & 8.378 & 78.13 & 12.470 & 0.048 \\
+        2 & 15 min & 2.901 & 5.511 & 0.845 & 1.451 & 0.597 & 78.44 & 8.929  & 0.031 \\
+        2 & 30 min & 3.442 & 6.758 & 1.028 & 1.721 & 0.677 & 78.22 & 10.485 & 0.029 \\
+        2 & 60 min & 4.244 & 8.378 & 1.320 & 2.122 & 0.775 & 78.13 & 12.470 & 0.048 \\
         \midrule
-        3 & 15 min & 2.888 & 5.533 & 78.84 & 8.723  & 0.028 \\
-        3 & 30 min & 3.424 & 6.799 & 77.87 & 9.948  & 0.034 \\
-        3 & 60 min & 4.203 & 8.384 & 77.50 & 11.781 & 0.055 \\
+        3 & 15 min & 2.888 & 5.533 & 0.846 & 1.444 & 0.593 & 78.84 & 8.723  & 0.028 \\
+        3 & 30 min & 3.424 & 6.799 & 1.030 & 1.712 & 0.673 & 77.87 & 9.948  & 0.034 \\
+        3 & 60 min & 4.203 & 8.384 & 1.322 & 2.102 & 0.770 & 77.50 & 11.781 & 0.055 \\
         \bottomrule
     \end{tabular}}
 \end{table}
@@ -1387,6 +1397,12 @@ improvement in coverage. At the longer forecasting horizons, however, the
 sharper intervals obtained with $K=3$ come at the cost of increased
 undercoverage. Quantile crossing remains negligible for both configurations.
 
+The Pinball Loss values show a similarly limited effect of increasing the
+diffusion depth. The $K=3$ configuration slightly improves the median and
+upper-quantile losses at all horizons, while the loss associated with the
+lower quantile slightly increases. Overall, increasing the diffusion depth
+does not produce a consistent improvement across all probabilistic metrics.
+
 The two configurations also exhibit different computational behavior. The
 $K=2$ model was trained for 106 epochs, whereas the $K=3$ variant stopped
 after 85 epochs. Despite requiring fewer epochs, the additional diffusion
@@ -1418,7 +1434,7 @@ connections. As for the weighted graph, the binary adjacency matrix was
 row-normalized before being used for diffusion message passing.
 
 Table~\ref{tab:weighted_binary} compares the two graph representations on the
-test set. The weighted graph consistently achieves lower point forecasting
+test set. The weighted graph consistently achieves slightly lower point forecasting
 errors and the difference becomes larger as the forecasting horizon increases.
 
 
@@ -1428,19 +1444,22 @@ errors and the difference becomes larger as the forecasting horizon increases.
     and binary adjacency matrices.}
     \label{tab:weighted_binary}
     \resizebox{\linewidth}{!}{
-    \begin{tabular}{llrrrr}
+    \begin{tabular}{llrrrrrrrr}
         \toprule
-        Graph & Horizon & MAE & RMSE & Coverage (\%) & Interval Width \\
+        Graph & Horizon &
+        MAE & RMSE &
+        Pinball$_{0.1}$ & Pinball$_{0.5}$ & Pinball$_{0.9}$ &
+        Coverage (\%) & Interval Width \\
         \midrule
         Weighted
-        & 15 min & 2.901 & 5.511 & 78.44 & 8.929 \\
-        & 30 min & 3.442 & 6.758 & 78.22 & 10.485 \\
-        & 60 min & 4.244 & 8.378 & 78.13 & 12.470 \\
+        & 15 min & 2.901 & 5.511 & 0.845 & 1.451 & 0.597 & 78.44 & 8.929 \\
+        & 30 min & 3.442 & 6.758 & 1.028 & 1.721 & 0.677 & 78.22 & 10.485 \\
+        & 60 min & 4.244 & 8.378 & 1.320 & 2.122 & 0.775 & 78.13 & 12.470 \\
         \midrule
         Binary
-        & 15 min & 2.948 & 5.682 & 79.54 & 8.878 \\
-        & 30 min & 3.543 & 7.033 & 78.80 & 10.424 \\
-        & 60 min & 4.443 & 8.754 & 78.11 & 12.593 \\
+        & 15 min & 2.948 & 5.682 & 0.873 & 1.474 & 0.610 & 79.54 & 8.878 \\
+        & 30 min & 3.543 & 7.033 & 1.084 & 1.772 & 0.699 & 78.80 & 10.424 \\
+        & 60 min & 4.443 & 8.754 & 1.417 & 2.222 & 0.807 & 78.11 & 12.593 \\
         \bottomrule
     \end{tabular}}
 \end{table}
@@ -1489,6 +1508,14 @@ to the nominal 80\% level. At 60 minutes, however, the binary representation
 produces a slightly wider interval, while coverage remains almost unchanged.
 Therefore, binarizing the graph does not provide a consistent advantage in
 terms of interval sharpness or reliability.
+
+The probabilistic metrics provide further evidence in favor of preserving
+the original edge weights. The weighted graph achieves lower Pinball Loss
+for all three predicted quantiles and at every forecasting horizon. The
+difference also becomes more pronounced at longer horizons, consistently
+with the behavior observed for MAE and RMSE. This indicates that the edge
+weights contribute not only to point forecasting accuracy, but also to the
+estimation of the predictive quantiles.
 
 
 Overall, these results indicate that the benefit of graph message passing is
@@ -1654,22 +1681,25 @@ prediction horizon increases.
     \caption{Performance of the Graph-Temporal model under normal and
     high-congestion conditions on the test set.}
     \label{tab:congestion_results}
-    \begin{tabular}{llrrrr}
+    \resizebox{\linewidth}{!}{
+    \begin{tabular}{llrrrrrrrr}
         \toprule
         Condition & Horizon &
-        MAE & RMSE & Coverage (\%) & Interval Width \\
+        MAE & RMSE &
+        Pinball$_{0.1}$ & Pinball$_{0.5}$ & Pinball$_{0.9}$ &
+        Coverage (\%) & Interval Width \\
         \midrule
         Normal
-        & 15 min & 2.770 & 5.289 & 78.4 & 8.499 \\
-        & 30 min & 3.257 & 6.453 & 78.3 & 9.911 \\
-        & 60 min & 3.974 & 7.957 & 78.3 & 11.730 \\
+        & 15 min & 2.770 & 5.289 & 0.819 & 1.385 & 0.559 & 78.4 & 8.499 \\
+        & 30 min & 3.257 & 6.453 & 0.990 & 1.629 & 0.626 & 78.3 & 9.911 \\
+        & 60 min & 3.974 & 7.957 & 1.266 & 1.987 & 0.705 & 78.3 & 11.730 \\
         \midrule
         High congestion
-        & 15 min & 4.463 & 7.669 & 78.7 & 14.035 \\
-        & 30 min & 5.636 & 9.660 & 77.9 & 17.283 \\
-        & 60 min & 7.414 & 12.296 & 75.8 & 21.169 \\
+        & 15 min & 4.463 & 7.669 & 1.159 & 2.232 & 1.044 & 78.7 & 14.035 \\
+        & 30 min & 5.636 & 9.660 & 1.467 & 2.818 & 1.281 & 77.9 & 17.283 \\
+        & 60 min & 7.414 & 12.296 & 1.957 & 3.707 & 1.596 & 75.8 & 21.169 \\
         \bottomrule
-    \end{tabular}
+    \end{tabular}}
 \end{table}
 
 It is worth noting that the performance observed under normal conditions is
@@ -1677,7 +1707,7 @@ close to the overall test performance reported in
 Section~\ref{sec:in_distribution_results}. This is expected from the
 definition of the stress condition. High congestion is intentionally defined
 as a relatively rare event through the 95th percentile of the training
-congestion-ratio distribution and accounts for only 484 out of 6,224 test
+congestion-ratio distribution and accounts for only 484 out of 6224 test
 windows, approximately 7.8\%, at each forecasting horizon. Consequently,
 the overall test metrics are dominated by the much larger normal subset and
 can therefore conceal the substantially poorer performance observed during
@@ -1746,9 +1776,23 @@ coverage remains approximately stable, changing from 78.4\% under normal
 conditions to 78.7\% under high congestion. At 30 minutes, it decreases
 slightly from 78.3\% to 77.9\%. The largest degradation occurs at 60 minutes,
 where coverage decreases from approximately 78.3\% to 75.8\%, despite the
-prediction intervals being substantially wider. Relative to the nominal
-80\% coverage level, this indicates increased undercoverage during
-high-congestion periods at the longest forecasting horizon.
+prediction intervals being substantially wider.
+
+The pronounced increase in interval width also represents a loss of
+sharpness. Although wider intervals appropriately express greater predictive
+uncertainty, excessively wide intervals provide a less precise and therefore
+less informative characterization of future traffic conditions. Under high
+congestion, the model therefore exhibits a double degradation at longer
+horizons: the prediction intervals become less sharp while still failing to
+achieve the nominal 80\% coverage. This indicates that the additional
+uncertainty expressed by the model is not sufficient to maintain reliable
+probabilistic forecasts under the shifted traffic regime.
+
+The degradation under high congestion is also evident in the probabilistic
+forecasting errors. Pinball Loss increases for all three predicted quantiles
+and at every forecasting horizon, with the differences becoming larger at
+longer horizons. This shows that high congestion affects not only the median
+forecast, but the estimated predictive distribution more generally.
 
 Overall, the stress test reveals two distinct effects of high-congestion
 conditions. First, point forecasting errors increase substantially, showing
@@ -1817,12 +1861,16 @@ actual traffic evolution.
 These examples illustrate the two effects identified quantitatively in
 Section~\ref{subsec:shift_quantitative}. High congestion increases the
 difficulty of the point forecasting task and simultaneously leads the model
-to produce wider uncertainty intervals. However, increasing interval width
-alone is not sufficient to guarantee reliable uncertainty estimates when the
-predictive distribution is systematically displaced from the observations.
-This behavior provides a qualitative explanation for the reduced empirical
-coverage observed under high congestion, particularly at longer forecasting
-horizons.
+to produce wider uncertainty intervals. Although wider intervals can reflect
+greater uncertainty, excessively wide intervals are also less informative,
+as they provide a less precise characterization of the range of plausible
+future traffic conditions. Moreover, increasing interval width alone is not
+sufficient to guarantee reliable uncertainty estimates when the predictive
+distribution is systematically displaced from the observations. This behavior
+provides a qualitative explanation for the reduced empirical coverage
+observed under high congestion, particularly at longer forecasting horizons,
+and highlights the need to consider both coverage and interval sharpness when
+assessing probabilistic forecasts.
 
 
 \section{Mitigation Strategies}
@@ -1840,7 +1888,9 @@ as a possible extension.
 \subsection{Conformalized Quantile Regression}
 \label{subsec:cqr}
 
-Conformalized Quantile Regression (CQR) was applied as a post-hoc calibration
+Conformalized Quantile Regression (CQR)
+\citep{romano2019cqr}
+was applied as a post-hoc calibration
 procedure to the prediction intervals produced by the trained Graph-Temporal
 model. The method uses the validation set as a calibration set and adjusts
 the lower and upper predicted quantiles according to their observed
@@ -1998,9 +2048,13 @@ undercoverage observed in the most challenging shifted condition.
 \end{figure}
 
 Figure~\ref{fig:cqr_results} shows that the improvement in coverage is
-obtained by moderately expanding the original prediction intervals. Since
-CQR leaves the median forecast unchanged, this calibration step improves
-uncertainty reliability without altering point forecasting accuracy.
+obtained by further expanding the original prediction intervals. This
+introduces an important trade-off, since the intervals were already
+substantially wider under high-congestion conditions. Although CQR improves
+empirical coverage, the additional widening further reduces interval
+sharpness and can therefore make the probabilistic forecasts less informative.
+Since CQR leaves the median forecast unchanged, it does not address the
+increase in point forecasting error observed under high congestion.
 
 The remaining gap under high congestion, particularly at 60 minutes,
 highlights an important limitation of the global calibration strategy.
@@ -2019,92 +2073,56 @@ strategies that explicitly account for congestion during model training.
 Although CQR improves the calibration of the prediction intervals, the
 remaining undercoverage under high-congestion conditions suggests that a
 global post-hoc correction cannot completely address the distribution shift.
-A complementary mitigation strategy would therefore intervene directly
-during model training, encouraging the model to allocate greater importance
-to observations belonging to congested traffic regimes.
+A second mitigation strategy would act directly during model training rather
+than correcting the prediction intervals post hoc. In particular, previous
+work on traffic speed forecasting has addressed the imbalance between
+free-flow and congested conditions through congestion-adaptive loss weighting,
+assigning greater importance to prediction errors occurring under congested
+traffic states \citep{zhang2025casaformer}.
 
-A possible approach is to introduce a congestion-aware weighted version of
-the masked Pinball Loss. The congestion condition can be defined using the
-same training-derived criterion introduced in
-Section~\ref{subsec:congestion_definition}. In particular, each target
-timestamp can be associated with its congestion ratio $C_t$, computed using
-the per-sensor thresholds estimated exclusively from the training data.
 
-The standard masked Pinball Loss can then be modified by assigning a larger
-weight to targets associated with high-congestion conditions. Let
-$w_{b,h}$ denote the weight associated with forecasting horizon $h$ of sample
-$b$. A simple weighting scheme is
+Following this principle, a congestion-aware extension of the probabilistic
+training objective could be obtained by weighting the Pinball Loss according
+to the traffic condition,
 
-\begin{equation}
-    w_{b,h} =
-    \begin{cases}
-        1 + \lambda, & \text{if } C_{t_b+h} \geq \tau_{\mathrm{peak}}, \\
-        1,           & \text{otherwise},
-    \end{cases}
-    \label{eq:congestion_weight}
-\end{equation}
+\[
+\mathcal{L}_{\mathrm{CA}}
+=
+\frac{
+\sum_{i,t,h,q}
+m_{i,t,h}\,w_{i,t,h}\,
+\rho_q
+\left(
+y_{i,t,h}-\hat{y}^{(q)}_{i,t,h}
+\right)
+}{
+\sum_{i,t,h}m_{i,t,h}\,w_{i,t,h}
+},
+\]
 
-where $\lambda \geq 0$ controls the additional importance assigned to
-high-congestion targets. The resulting weighted objective becomes
+where
 
-\begin{equation}
-    \mathcal{L}_{\mathrm{weighted}}
-    =
-    \frac{
-        \displaystyle
-        \sum_b \sum_h \sum_n
-        w_{b,h}\,m_{b,h,n}
-        \sum_{q \in \mathcal{Q}}
-        \mathcal{L}_q
-        \left(
-            y_{b,h,n},
-            \hat{y}^{(q)}_{b,h,n}
-        \right)
-    }{
-        \displaystyle
-        |\mathcal{Q}|
-        \sum_b \sum_h \sum_n
-        w_{b,h}\,m_{b,h,n}
-    }.
-    \label{eq:weighted_pinball}
-\end{equation}
+\[
+w_{i,t,h}
+=
+\begin{cases}
+\lambda_{\mathrm{cong}}, &
+\text{if } y_{i,t,h} \le \tau_i,\\
+1, & \text{otherwise},
+\end{cases}
+\qquad
+\lambda_{\mathrm{cong}}>1,
+\]
 
-This modification increases the contribution of congested targets to the
-training objective without discarding or undersampling observations from
-normal traffic conditions. The hyperparameter $\lambda$ would control the
-strength of the reweighting and should be selected using the validation set,
-considering both normal and high-congestion performance.
+and $\tau_i$ is the sensor-specific congestion threshold estimated from the
+training data.
 
-Unlike CQR, which adjusts already estimated prediction intervals, this
-strategy would modify the parameters learned by the forecasting model.
-Consequently, it could potentially improve both the median forecast and the
-estimated conditional quantiles during congestion. This is particularly
-relevant to the qualitative behavior observed in
-Figure~\ref{fig:shift_examples}, where the high-congestion example exhibits
-not only insufficient interval coverage but also a progressively displaced
-median forecast at longer horizons.
-
-Importantly, the congestion labels would only be required during training
-to construct the weights in Equation~\ref{eq:congestion_weight}. At inference
-time, the trained model would continue to receive exactly the same inputs as
-the original Graph-Temporal model and would not require knowledge of future
-congestion conditions.
-
-This approach was not implemented in the present work and is therefore
-proposed as a possible extension rather than evaluated experimentally.
-Compared with the post-hoc CQR mitigation, congestion-aware training directly
-targets the regime in which the largest degradation was observed. However,
-increasing the contribution of relatively rare congestion events may introduce
-a trade-off with performance under normal conditions. For this reason, the
-weighting strength should be selected carefully and evaluated separately on
-normal and high-congestion subsets.
-
-The two mitigation strategies therefore operate at different stages of the
-forecasting pipeline. CQR provides a lightweight post-hoc correction that
-successfully improves marginal calibration without retraining the model,
-whereas congestion-aware training could potentially address the underlying
-conditional forecasting errors by explicitly exposing the optimization
-objective to the importance of rare congestion regimes.
+This would encourage the model to allocate greater optimization capacity to
+the low-speed regimes in which the largest performance degradation was
+observed. Unlike CQR, however, this strategy would require retraining the
+forecasting model and introducing an additional weighting hyperparameter
+$\lambda_{\mathrm{cong}}$. It was therefore not implemented in the present
+work and is proposed as a direction for future investigation.
 
 
 \section{Computational Cost and Accuracy-Reliability Trade-off}
@@ -2135,9 +2153,11 @@ contains 64868 trainable parameters compared with 40164 for the Temporal
 model, corresponding to an increase of approximately 61.5\%. Training time also
 increases from approximately 14.3 to 34.0 minutes, making the Graph-Temporal
 model about 2.4 times more expensive to train in the considered experimental
-setting. This additional cost results from the diffusion operations and from
-the stacked graph-temporal blocks used to combine spatial and temporal
-information.
+setting.
+This additional cost results from the repeated multi-hop graph propagation
+operations and from the stacked graph-temporal blocks used to combine spatial
+and temporal information.
+
 
 The additional computational cost is accompanied by improved forecasting
 accuracy. As shown in Section~\ref{sec:in_distribution_results}, the
@@ -2243,9 +2263,7 @@ Finally, CQR is calibrated globally for each forecasting horizon using the
 validation distribution. While this substantially improves marginal
 coverage, it does not explicitly account for traffic regime and therefore
 cannot guarantee the same calibration quality within the high-congestion
-subset. In addition, the temporal and spatial dependence present in traffic
-data makes the standard exchangeability assumptions underlying conformal
-prediction less directly applicable.
+subset.
 
 
 \subsection{Future Improvements}
