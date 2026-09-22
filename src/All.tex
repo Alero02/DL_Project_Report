@@ -35,9 +35,9 @@ understanding the contribution of the graph and the robustness of the
 probabilistic predictions. The graph-temporal model is analyzed at the sensor
 level, under different graph configurations and diffusion depths, and under a
 distribution shift defined by unusually high network-wide congestion.
-Finally, calibration strategies are investigated to determine whether the
-reliability of the predictive intervals can be improved when the forecasting
-conditions become more challenging.
+Finally, mitigation strategies are investigated to determine whether the
+degradation in forecasting accuracy and uncertainty reliability can be reduced
+when forecasting conditions become more challenging.
 
 
 \subsection{Objectives and Research Questions}
@@ -81,10 +81,11 @@ following research questions:
     \item \textbf{Can the calibration degradation observed under
     distribution shift be mitigated?}
 
-    A post-hoc Conformalized Quantile Regression calibration procedure is
-    evaluated, while a congestion-aware training strategy is considered as a
-    complementary approach for directly improving robustness to rare
-    congestion regimes.
+    A post-hoc Conformalized Quantile Regression calibration procedure and a
+    congestion-aware training strategy are evaluated as complementary mitigation
+    approaches. The former directly targets predictive-interval calibration,
+    whereas the latter modifies the training objective to assign greater
+    importance to rare high-congestion targets.
 \end{enumerate}
 
 Together, these questions shift the analysis beyond average forecasting
@@ -660,8 +661,9 @@ layer, conceptually inspired by diffusion-based graph modeling for traffic
 forecasting \citep{li2018dcrnn}.
 This formulation implements a compact unidirectional multi-hop propagation
 operator rather than the bidirectional diffusion convolution of DCRNN.
-Only powers of the row-normalized propagation matrix PP are considered,
-with a separate learnable transformation $W_k$ for each propagation depth.
+Only powers of the row-normalized propagation matrix $\mathbf{P}$ are
+considered, with a separate learnable transformation $\mathbf{W}_k$ for
+each propagation depth.
 Given node features $\mathbf{X}$, the layer computes
 
 \begin{equation}
@@ -1251,6 +1253,31 @@ clear reduction in forecasting error.
 
     \begin{minipage}[b]{0.8\linewidth}
         \centering
+        \includegraphics[width=\linewidth]{img/graph_impact_analysis/graph_helps_h3_sensor_764858}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.8\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/graph_impact_analysis/graph_helps_h6_sensor_717461}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.8\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{img/graph_impact_analysis/graph_helps_h12_sensor_717458}
+    \end{minipage}
+
+    \caption{Representative forecasting examples in which the Graph-Temporal
+    model improves over the Temporal GRU at the 15-minute (top), 30-minute
+    (center), and 60-minute (bottom) forecasting horizons.}
+    \label{fig:graph_help_examples}
+\end{figure}
+
+
+\begin{figure}[t]
+    \centering
+
+    \begin{minipage}[b]{0.8\linewidth}
+        \centering
         \includegraphics[width=\linewidth]{img/graph_impact_analysis/graph_hurts_h3_sensor_760650}
     \end{minipage}
     \hfill
@@ -1277,30 +1304,6 @@ are particularly useful because they show that neighboring information is
 not always informative for the future evolution of a given sensor. The
 presence of such cases motivates a more detailed investigation of whether the
 benefit of graph message passing can be related to the local graph structure.
-
-\begin{figure}[t]
-    \centering
-
-    \begin{minipage}[b]{0.8\linewidth}
-        \centering
-        \includegraphics[width=\linewidth]{img/graph_impact_analysis/graph_helps_h3_sensor_764858}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.8\linewidth}
-        \centering
-        \includegraphics[width=\linewidth]{img/graph_impact_analysis/graph_helps_h6_sensor_717461}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.8\linewidth}
-        \centering
-        \includegraphics[width=\linewidth]{img/graph_impact_analysis/graph_helps_h12_sensor_717458}
-    \end{minipage}
-
-    \caption{Representative forecasting examples in which the Graph-Temporal
-    model improves over the Temporal GRU at the 15-minute (top), 30-minute
-    (center), and 60-minute (bottom) forecasting horizons.}
-    \label{fig:graph_help_examples}
-\end{figure}
 
 Overall, these examples confirm that the effect of graph message passing is
 sensor and time dependent. Although spatial information improves forecasting
@@ -1653,11 +1656,10 @@ single fixed set of test windows.
 
 Applying this procedure to the 6224 test windows yields 484 high-congestion
 samples and 5740 normal samples at each evaluated horizon. Although the
-subset sizes are identical, their composition differs across horizons. For
-example, the high-congestion masks have a Jaccard similarity of 0.741 between
-15 and 30 minutes, 0.579 between 30 and 60 minutes, and 0.449 between
-15 and 60 minutes. This decreasing overlap is expected because the target
-timestamps become progressively farther apart.
+subset sizes are identical, their composition differs across horizons because
+the congestion condition is evaluated independently at the target timestamp
+associated with each forecast horizon. Consequently, the same input window
+may belong to different traffic-condition subsets at 15, 30, and 60 minutes.
 
 The stress test evaluates the same trained Graph-Temporal model used in the
 previous experiments, without retraining or adapting it to high-congestion
@@ -1801,8 +1803,10 @@ conditions. Second, although the model reacts to this increased difficulty
 by producing wider prediction intervals, the uncertainty estimates do not
 fully compensate for the degradation at longer horizons. In particular, the
 combination of substantially wider intervals and lower coverage at 60 minutes
-indicates residual overconfidence under distribution shift. This motivates
-the calibration mitigation investigated in Section~\ref{sec:mitigation}.
+indicates residual overconfidence under distribution shift.
+This motivates the mitigation strategies investigated in
+Section~\ref{sec:mitigation}, which address the observed degradation through
+both post-hoc calibration and congestion-aware training.
 
 \subsection{Qualitative Analysis}
 \label{subsec:shift_qualitative}
@@ -1879,11 +1883,12 @@ assessing probabilistic forecasts.
 The distribution-shift analysis showed that the Graph-Temporal model
 increases the width of its prediction intervals during high-congestion
 periods, but this adaptation is not sufficient to preserve the desired
-coverage, particularly at the 60-minute forecasting horizon. This section
-investigates a post-hoc calibration strategy designed to improve the
-reliability of the probabilistic forecasts without retraining the forecasting
-model. A second, training-based mitigation strategy is subsequently discussed
-as a possible extension.
+coverage, particularly at the 60-minute forecasting horizon.
+This section investigates two complementary mitigation strategies. First,
+a post-hoc calibration procedure is applied to improve the reliability of
+the predictive intervals without retraining the forecasting model. Second,
+a congestion-aware training objective is evaluated to explicitly increase
+the importance of high-congestion targets during model optimization.
 
 \subsection{Conformalized Quantile Regression}
 \label{subsec:cqr}
@@ -1938,9 +1943,9 @@ and therefore
     \label{eq:cqr_correction}
 \end{equation}
 
-Intuitively, $\hat{s}$ represents the amount by which the original interval
-must be expanded so that approximately 80\% of the calibration targets are
-covered.
+Intuitively, $\hat{s}$ represents the conformal correction applied to the
+original interval bounds to achieve the target coverage level on the
+calibration data.
 
 The calibrated prediction interval for a test observation is obtained by
 expanding both bounds by this correction,
@@ -1993,12 +1998,12 @@ high-congestion conditions.
         & 60 min & 78.13 & 79.96 \\
         \midrule
         Normal
-        & 15 min & 78.4 & 80.27 \\
-        & 30 min & 78.3 & 80.23 \\
-        & 60 min & 78.3 & 80.21 \\
+        & 15 min & 78.41 & 80.27 \\
+        & 30 min & 78.25 & 80.23 \\
+        & 60 min & 78.33 & 80.21 \\
         \midrule
         High congestion
-        & 15 min & 78.74 & 79.89 \\
+        & 15 min & 78.72 & 79.89 \\
         & 30 min & 77.87 & 79.07 \\
         & 60 min & 75.81 & 77.04 \\
         \bottomrule
@@ -2020,7 +2025,7 @@ therefore effective at correcting the systematic in-distribution
 miscalibration of the original prediction intervals.
 
 The improvement is more limited under high congestion. Coverage increases
-from 78.74\% to 79.89\% at 15 minutes and from 77.87\% to 79.07\% at
+from 78.72\% to 79.89\% at 15 minutes and from 77.87\% to 79.07\% at
 30 minutes, bringing both substantially closer to the nominal level. At
 60 minutes, however, coverage increases only from 75.81\% to 77.04\% and
 remains clearly below the desired 80\%. Thus, the same calibration procedure
@@ -2073,56 +2078,243 @@ strategies that explicitly account for congestion during model training.
 Although CQR improves the calibration of the prediction intervals, the
 remaining undercoverage under high-congestion conditions suggests that a
 global post-hoc correction cannot completely address the distribution shift.
-A second mitigation strategy would act directly during model training rather
-than correcting the prediction intervals post hoc. In particular, previous
-work on traffic speed forecasting has addressed the imbalance between
-free-flow and congested conditions through congestion-adaptive loss weighting,
-assigning greater importance to prediction errors occurring under congested
-traffic states \citep{zhang2025casaformer}.
+As a second mitigation strategy, the training objective was therefore
+modified to explicitly increase the importance of high-congestion targets.
+Previous work on traffic speed forecasting has addressed the imbalance
+between free-flow and congested conditions through congestion-adaptive loss
+weighting, assigning greater importance to prediction errors occurring under
+congested traffic states \citep{zhang2025casaformer}.
+
+Following this principle, a congestion-aware version of the masked Pinball
+Loss was implemented. The congestion condition was defined using the same
+training-derived criterion introduced in
+Section~\ref{sec:distribution_shift}. For each target timestamp, the network
+congestion ratio $C_{t+h}$ was computed from the fraction of valid sensors
+whose speed was below their sensor-specific congestion threshold. A target
+timestamp was classified as high congestion when
+
+\begin{equation}
+    C_{t+h} \geq \tau_{\mathrm{peak}},
+\end{equation}
+
+where $\tau_{\mathrm{peak}}$ is the network-level congestion threshold
+estimated exclusively from the training data.
+
+A congestion-dependent weight was then assigned to each forecast step as
+
+\begin{equation}
+    w_{b,h}
+    =
+    1
+    +
+    \lambda
+    \mathbb{I}
+    \left(
+        C_{t_b+h} \geq \tau_{\mathrm{peak}}
+    \right),
+    \label{eq:congestion_weight}
+\end{equation}
+
+where $b$ denotes the sample, $h$ the forecast step, and $\lambda$ controls
+the additional importance assigned to high-congestion targets. In the
+implemented configuration, $\lambda=1$ was used, so that normal targets
+received weight 1 and high-congestion targets received weight 2.
+
+The resulting congestion-aware training objective is
+
+\begin{equation}
+    \mathcal{L}_{\mathrm{CA}}
+    =
+    \frac{
+        \displaystyle
+        \sum_{b,h,n}
+        w_{b,h}\,
+        m_{b,h,n}
+        \sum_{q \in \mathcal{Q}}
+        \rho_q
+        \left(
+            y_{b,h,n}
+            -
+            \hat{y}^{(q)}_{b,h,n}
+        \right)
+    }{
+        \displaystyle
+        |\mathcal{Q}|
+        \sum_{b,h,n}
+        w_{b,h}\,
+        m_{b,h,n}
+    },
+    \label{eq:congestion_aware_loss}
+\end{equation}
+
+where $m_{b,h,n}$ is the target-availability mask,
+$\mathcal{Q}=\{0.1,0.5,0.9\}$ is the set of predicted quantiles, and
+$\rho_q(\cdot)$ denotes the Pinball Loss for quantile $q$. The congestion
+weight is shared across sensors and quantiles for a given sample and forecast
+step, while missing target values remain excluded through the availability
+mask.
+
+The weighting was applied independently to all 12 forecast steps used during
+training. The same congestion-aware objective was also used on the validation
+set for early stopping. The Graph-Temporal architecture was left unchanged,
+so the mitigation modifies only the optimization objective and does not add
+model parameters. With $\lambda=1$, the best validation checkpoint was
+obtained at epoch 75.
+
+Unlike CQR, congestion-aware training directly modifies the forecasting model
+by emphasizing the traffic regime in which the largest performance
+degradation was observed. However, the congestion information is required
+only during training and validation to construct the loss weights. At
+inference time, the trained model uses the same historical traffic inputs and
+graph structure as the original Graph-Temporal model and does not require
+knowledge of future congestion conditions. The effect of this training-time
+mitigation is evaluated in the following section.
 
 
-Following this principle, a congestion-aware extension of the probabilistic
-training objective could be obtained by weighting the Pinball Loss according
-to the traffic condition,
+\subsubsection{Congestion-Aware Training Results}
 
-\[
-\mathcal{L}_{\mathrm{CA}}
-=
-\frac{
-\sum_{i,t,h,q}
-m_{i,t,h}\,w_{i,t,h}\,
-\rho_q
-\left(
-y_{i,t,h}-\hat{y}^{(q)}_{i,t,h}
-\right)
-}{
-\sum_{i,t,h}m_{i,t,h}\,w_{i,t,h}
-},
-\]
+\begin{table}[H]
+\centering
+\caption{Performance of the original and congestion-aware Graph-Temporal
+models under high-congestion conditions.}
+\label{tab:congestion_aware_results}
+\begin{tabular}{lcccccc}
+\toprule
+& \multicolumn{2}{c}{15 min}
+& \multicolumn{2}{c}{30 min}
+& \multicolumn{2}{c}{60 min} \\
+\cmidrule(lr){2-3}
+\cmidrule(lr){4-5}
+\cmidrule(lr){6-7}
+Metric & Original & CA & Original & CA & Original & CA \\
+\midrule
+MAE
+& 4.463 & 4.410
+& 5.636 & 5.483
+& 7.414 & 7.012 \\
 
-where
+RMSE
+& 7.669 & 7.655
+& 9.660 & 9.567
+& 12.296 & 11.883 \\
 
-\[
-w_{i,t,h}
-=
-\begin{cases}
-\lambda_{\mathrm{cong}}, &
-\text{if } y_{i,t,h} \le \tau_i,\\
-1, & \text{otherwise},
-\end{cases}
-\qquad
-\lambda_{\mathrm{cong}}>1,
-\]
+Coverage (\%)
+& 78.72 & 79.39
+& 77.87 & 78.34
+& 75.81 & 76.98 \\
 
-and $\tau_i$ is the sensor-specific congestion threshold estimated from the
-training data.
+Interval width
+& 14.035 & 13.672
+& 17.283 & 16.604
+& 21.169 & 20.600 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-This would encourage the model to allocate greater optimization capacity to
-the low-speed regimes in which the largest performance degradation was
-observed. Unlike CQR, however, this strategy would require retraining the
-forecasting model and introducing an additional weighting hyperparameter
-$\lambda_{\mathrm{cong}}$. It was therefore not implemented in the present
-work and is proposed as a direction for future investigation.
+Table~\ref{tab:congestion_aware_results} directly compares the original
+Graph-Temporal model with the congestion-aware variant in the regime targeted
+by the reweighting strategy. Under high congestion, MAE decreases from
+4.463 to 4.410 at 15 minutes, from 5.636 to 5.483 at 30 minutes, and from
+7.414 to 7.012 at 60 minutes. The relative improvement becomes more
+pronounced as the forecasting horizon increases, reaching approximately
+5.4\% at 60 minutes. A similar trend is observed for RMSE, with the largest
+reduction occurring at the 60-minute horizon, from 12.296 to 11.883.
+
+The probabilistic forecasts also improve in the targeted regime. Empirical
+coverage increases from 78.72\% to 79.39\% at 15 minutes, from 77.87\% to
+78.34\% at 30 minutes, and from 75.81\% to 76.98\% at 60 minutes. The
+mitigation therefore reduces the undercoverage observed in the original
+Graph-Temporal model, although it does not completely restore the nominal
+80\% coverage at the longest forecasting horizon.
+
+Importantly, the improvement in coverage is not obtained by simply widening
+the prediction intervals. Under high congestion, interval width decreases
+from 14.035 to 13.672 at 15 minutes, from 17.283 to 16.604 at 30 minutes,
+and from 21.169 to 20.600 at 60 minutes. The congestion-aware model therefore
+achieves higher coverage while producing sharper intervals. Together with the
+reductions in MAE and RMSE, this indicates that the reweighted training
+objective improves the forecasts in the shifted regime rather than merely
+increasing the amount of predicted uncertainty.
+
+Figure~\ref{fig:congestion_aware_results} provides a complementary view of
+the congestion-aware model by comparing its performance over the complete
+test set, normal traffic conditions, and high-congestion periods. The MAE
+and RMSE plots show that high congestion remains substantially more difficult
+than normal traffic and that the performance gap increases with the forecast
+horizon. In particular, point forecasting errors increase considerably at
+60 minutes under high congestion, despite the improvements over the original
+model reported in Table~\ref{tab:congestion_aware_results}.
+
+The same distinction between traffic regimes is visible in the probabilistic
+predictions. As shown in the coverage plot of
+Figure~\ref{fig:congestion_aware_results}, coverage remains close to the
+nominal 80\% level at 15 minutes but decreases with the forecasting horizon,
+especially under high congestion. At the same time, the interval-width plot
+shows that prediction intervals become progressively wider for longer
+horizons and are substantially wider during congestion than under normal
+conditions. This indicates that the model appropriately expresses greater
+uncertainty during difficult traffic regimes, although the increase in
+interval width is still insufficient to maintain nominal coverage at the
+longest horizon.
+
+The improvements under congestion are accompanied by a moderate trade-off
+under normal traffic conditions. Normal-condition MAE increases from 2.770
+to 2.780 at 15 minutes, from 3.257 to 3.297 at 30 minutes, and from 3.974
+to 4.069 at 60 minutes relative to the original Graph-Temporal model.
+Emphasizing high-congestion targets during optimization therefore slightly
+reduces point-forecasting accuracy in the dominant normal regime. The effect
+is limited at short horizons but becomes more visible at 60 minutes.
+
+Overall, the two implemented mitigation strategies address different aspects
+of the robustness problem. CQR provides a lightweight post-hoc correction
+that brings marginal coverage close to the nominal level without modifying
+the median forecasts. Congestion-aware training instead modifies the learned
+forecasting function itself and improves both point accuracy and probabilistic
+performance within the high-congestion regime, at the cost of a moderate
+degradation in normal-condition point accuracy. Neither strategy completely
+eliminates the long-horizon calibration gap under severe congestion, but the
+results indicate that global post-hoc calibration and regime-aware training
+provide complementary forms of mitigation.
+
+\begin{figure}[H]
+    \centering
+
+    % Top row: point forecasting accuracy
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]
+        {img/congestion_aware_training/mae_distribution_shift}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]
+        {img/congestion_aware_training/rmse_distribution_shift}
+    \end{subfigure}
+
+    \vspace{0.4cm}
+
+    % Bottom row: probabilistic forecasting
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]
+        {img/congestion_aware_training/coverage_distribution_shift}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]
+        {img/congestion_aware_training/interval_width_distribution_shift}
+    \end{subfigure}
+
+    \caption{Performance of the congestion-aware Graph-Temporal model across
+    the evaluated forecasting horizons. The top row reports point forecasting
+    accuracy in terms of MAE (left) and RMSE (right), while the bottom row
+    reports empirical coverage (left) and prediction interval width (right).
+    Results are shown for the overall test set, normal traffic conditions,
+    and high-congestion periods.}
+    \label{fig:congestion_aware_results}
+\end{figure}
 
 
 \section{Computational Cost and Accuracy-Reliability Trade-off}
@@ -2175,13 +2367,15 @@ coverage decreases to 75.8\% at the 60-minute horizon. The model therefore
 does not fully translate its increased uncertainty into reliable coverage
 under distribution shift.
 
-The CQR mitigation partially addresses this trade-off without increasing
-model complexity or requiring retraining. Post-hoc calibration brings overall
-coverage close to the nominal 80\% level while leaving the median point
-forecast unchanged. Nevertheless, the remaining undercoverage under
-high-congestion conditions shows that improved average calibration does not
-necessarily imply equally reliable uncertainty estimates across different
-traffic regimes.
+The mitigation experiments further illustrate different
+accuracy-reliability-cost trade-offs. CQR provides an inexpensive post-hoc
+mechanism for improving marginal calibration, while congestion-aware training
+requires retraining but directly improves forecasting performance in the
+high-congestion regime. The latter reduces both point error and interval width
+while increasing coverage under congestion, although this comes with a small
+loss of accuracy under normal conditions. These results reinforce the need
+to evaluate robustness jointly in terms of accuracy, calibration, sharpness,
+and computational cost.
 
 Overall, the Graph-Temporal architecture provides a clear accuracy advantage
 over the purely temporal baseline at the cost of greater computational
@@ -2227,15 +2421,27 @@ decreases at longer horizons. The model therefore recognizes part of the
 increased uncertainty associated with congestion, but does not fully capture
 the shifted predictive distribution.
 
-Finally, the mitigation experiments show that post-hoc calibration can
-substantially improve uncertainty reliability. CQR brings overall empirical
-coverage close to the nominal level without modifying the median forecasts or
-retraining the model. However, residual undercoverage remains under
-high-congestion conditions, particularly at the longest horizon. This result
-indicates that good marginal calibration does not necessarily imply equally
-reliable uncertainty estimates under specific shifted conditions and
-motivates mitigation strategies that explicitly account for rare traffic
-regimes during training.
+The mitigation experiments also reveal that calibration and robustness can be
+addressed at different stages of the forecasting pipeline. CQR effectively
+corrects the general undercoverage of the model and brings marginal coverage
+close to the nominal 80\% level. Congestion-aware training instead targets
+the difficult regime directly during optimization. With $\lambda=1$, it
+reduces high-congestion forecasting errors at all evaluated horizons, with
+the largest MAE reduction occurring at 60 minutes, while also improving
+coverage and producing narrower intervals than the original model under
+high congestion. This improvement is accompanied by a moderate degradation
+in normal-condition point accuracy, highlighting a trade-off between
+performance in the dominant regime and robustness to rare congestion events.
+
+Nevertheless, neither mitigation eliminates the deterioration associated with
+longer forecasting horizons. Point forecasting errors increase with the
+forecast horizon, particularly under high-congestion conditions; CQR leaves
+these errors unchanged by construction, while congestion-aware training
+reduces them without eliminating their horizon-dependent increase. Empirical
+coverage also becomes more difficult to maintain at longer horizons,
+especially under high congestion. At the same time, prediction intervals
+remain substantially wider than under normal conditions, reducing their
+sharpness and informativeness.
 
 
 \subsection{Limitations}
@@ -2266,15 +2472,26 @@ cannot guarantee the same calibration quality within the high-congestion
 subset.
 
 
+The congestion-aware mitigation also has limitations. The weighting strategy
+depends on a binary definition of high congestion and on the choice of the
+reweighting parameter $\lambda$. The evaluated $\lambda=1$ configuration
+improves performance in the targeted regime but slightly degrades point
+accuracy under normal conditions. A broader validation-based analysis of the
+weighting strength would therefore be required to characterize this trade-off
+more completely.
+
+
 \subsection{Future Improvements}
 \label{subsec:future_improvements}
 
-Several extensions could address these limitations. A first direction would
-be to evaluate the proposed congestion-aware training objective, assigning
-greater importance to rare congested targets during optimization and
-measuring whether this improves both point forecasts and uncertainty
-estimation without substantially degrading performance under normal
-conditions.
+Several extensions could address these limitations. A first extension would
+be to investigate the congestion-aware training
+strategy more systematically by validating different values of the weighting
+parameter $\lambda$. This would allow the trade-off between robustness under
+high congestion and performance under normal traffic conditions to be
+characterized more precisely. More adaptive weighting schemes could also be
+considered, for example by assigning continuous weights based on congestion
+severity rather than using a binary normal/high-congestion distinction.
 
 The robustness analysis could also be extended to additional distribution
 shifts, such as partially masked sensor histories or simulated sensor
@@ -2316,14 +2533,23 @@ coverage deteriorates at longer horizons, showing that increased uncertainty
 does not necessarily translate into reliable uncertainty estimates under
 distribution shift.
 
-Post-hoc calibration through Conformalized Quantile Regression substantially
-improves overall coverage and brings it close to the nominal 80\% level
-without modifying the median forecasts or retraining the model. However, the
-remaining undercoverage under high congestion shows that marginal calibration
-alone is insufficient to fully address regime-specific reliability. A
-congestion-aware training objective was therefore proposed as a possible
-extension to explicitly increase the importance of these rare and difficult
-traffic conditions during learning.
+Two complementary mitigation strategies were evaluated. Post-hoc calibration
+through Conformalized Quantile Regression substantially improves overall
+coverage and brings it close to the nominal 80\% level without modifying the
+median forecasts or retraining the model. However, residual undercoverage
+remains under severe high congestion, particularly at the longest forecasting
+horizon.
+
+Congestion-aware training addresses this limitation from a different
+perspective by assigning greater importance to high-congestion targets during
+optimization. The implemented weighted Pinball Loss improves point forecasting
+accuracy under congestion at all evaluated horizons, with the largest gains
+at 60 minutes. It also increases empirical coverage while producing narrower
+prediction intervals in the shifted regime, indicating that the improvement
+does not result from simply increasing predictive uncertainty. These gains
+are accompanied by a moderate degradation in point accuracy under normal
+conditions, revealing a trade-off between average-regime performance and
+robustness to rare congestion events.
 
 Overall, the results demonstrate the value of exploiting spatial information
 for traffic forecasting while also highlighting the importance of evaluating

@@ -36,9 +36,10 @@
 \contentsline {subsection}{\numberline {8.1}Conformalized Quantile Regression}{22}{subsection.8.1}%
 \contentsline {subsubsection}{\numberline {8.1.1}Calibration Results}{23}{subsubsection.8.1.1}%
 \contentsline {subsection}{\numberline {8.2}Congestion-Aware Training}{24}{subsection.8.2}%
-\contentsline {section}{\numberline {9}Computational Cost and Accuracy-Reliability Trade-off}{24}{section.9}%
-\contentsline {section}{\numberline {10}Discussion}{25}{section.10}%
-\contentsline {subsection}{\numberline {10.1}Main Findings}{25}{subsection.10.1}%
-\contentsline {subsection}{\numberline {10.2}Limitations}{25}{subsection.10.2}%
-\contentsline {subsection}{\numberline {10.3}Future Improvements}{26}{subsection.10.3}%
-\contentsline {section}{\numberline {11}Conclusion}{26}{section.11}%
+\contentsline {subsubsection}{\numberline {8.2.1}Congestion-Aware Training Results}{25}{subsubsection.8.2.1}%
+\contentsline {section}{\numberline {9}Computational Cost and Accuracy-Reliability Trade-off}{26}{section.9}%
+\contentsline {section}{\numberline {10}Discussion}{27}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Main Findings}{27}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Limitations}{27}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Future Improvements}{28}{subsection.10.3}%
+\contentsline {section}{\numberline {11}Conclusion}{28}{section.11}%

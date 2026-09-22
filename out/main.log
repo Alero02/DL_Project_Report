@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.2.19)  18 SEP 2026 19:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.2.19)  22 SEP 2026 10:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -536,7 +536,7 @@ nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
 or `english'. on input line 21.
-<img/logo_poliba.png, id=168, 301.125pt x 301.125pt>
+<img/logo_poliba.png, id=172, 301.125pt x 301.125pt>
 File: img/logo_poliba.png Graphic file (type png)
 <use img/logo_poliba.png>
 Package pdftex.def Info: img/logo_poliba.png  used on input line 27.
@@ -576,225 +576,225 @@ l.63 \newpage
  (./All.tex [2
 
 ]
-<img/data_analysis/mean_speed_with_zeros.png, id=239, 1001.1804pt x 280.8894pt>
+<img/data_analysis/mean_speed_with_zeros.png, id=244, 1001.1804pt x 280.8894pt>
 
 File: img/data_analysis/mean_speed_with_zeros.png Graphic file (type png)
 <use img/data_analysis/mean_speed_with_zeros.png>
 Package pdftex.def Info: img/data_analysis/mean_speed_with_zeros.png  used on i
-nput line 154.
+nput line 155.
 (pdftex.def)             Requested size: 426.79135pt x 119.73859pt.
-<img/data_analysis/mean_speed_without_zeros.png, id=240, 1000.9395pt x 280.8894
+<img/data_analysis/mean_speed_without_zeros.png, id=245, 1000.9395pt x 280.8894
 pt>
 File: img/data_analysis/mean_speed_without_zeros.png Graphic file (type png)
 <use img/data_analysis/mean_speed_without_zeros.png>
 Package pdftex.def Info: img/data_analysis/mean_speed_without_zeros.png  used o
-n input line 158.
+n input line 159.
 (pdftex.def)             Requested size: 426.79135pt x 119.76859pt.
-<img/data_analysis/weekday_vs_weekend.png, id=242, 715.473pt x 280.8894pt>
+<img/data_analysis/weekday_vs_weekend.png, id=247, 715.473pt x 280.8894pt>
 File: img/data_analysis/weekday_vs_weekend.png Graphic file (type png)
 <use img/data_analysis/weekday_vs_weekend.png>
 Package pdftex.def Info: img/data_analysis/weekday_vs_weekend.png  used on inpu
-t line 186.
+t line 187.
 (pdftex.def)             Requested size: 320.0935pt x 125.66615pt.
  [3] [4 <./img/data_analysis/mean_speed_with_zeros.png> <./img/data_analysis/me
 an_speed_without_zeros.png> <./img/data_analysis/weekday_vs_weekend.png>] [5] [
 6] [7] [8]
-<img/graphtemporalarchitecture.png, id=317, 1238.6275pt x 1003.75pt>
+<img/graphtemporalarchitecture.png, id=322, 1238.6275pt x 1003.75pt>
 File: img/graphtemporalarchitecture.png Graphic file (type png)
 <use img/graphtemporalarchitecture.png>
 Package pdftex.def Info: img/graphtemporalarchitecture.png  used on input line 
-738.
+740.
 (pdftex.def)             Requested size: 426.79135pt x 345.86528pt.
  [9 <./img/graphtemporalarchitecture.png (PNG copy)>]
-<img/temporal_gru/learning_curves.png, id=328, 643.203pt x 353.1594pt>
+<img/temporal_gru/learning_curves.png, id=333, 643.203pt x 353.1594pt>
 File: img/temporal_gru/learning_curves.png Graphic file (type png)
 <use img/temporal_gru/learning_curves.png>
 Package pdftex.def Info: img/temporal_gru/learning_curves.png  used on input li
-ne 835.
+ne 837.
 (pdftex.def)             Requested size: 204.85802pt x 112.47981pt.
-<img/graph_temporal/graph_temporal_learning_curves.png, id=329, 642.2394pt x 35
+<img/graph_temporal/graph_temporal_learning_curves.png, id=334, 642.2394pt x 35
 3.1594pt>
 File: img/graph_temporal/graph_temporal_learning_curves.png Graphic file (type 
 png)
 <use img/graph_temporal/graph_temporal_learning_curves.png>
 Package pdftex.def Info: img/graph_temporal/graph_temporal_learning_curves.png 
- used on input line 842.
+ used on input line 844.
 (pdftex.def)             Requested size: 204.85802pt x 112.64687pt.
  [10 <./img/temporal_gru/learning_curves.png> <./img/graph_temporal/graph_tempo
 ral_learning_curves.png>] [11]
-<img/model_comparison/mae_model_comparison.png, id=353, 570.933pt x 353.1594pt>
+<img/model_comparison/mae_model_comparison.png, id=358, 570.933pt x 353.1594pt>
 
 File: img/model_comparison/mae_model_comparison.png Graphic file (type png)
 <use img/model_comparison/mae_model_comparison.png>
 Package pdftex.def Info: img/model_comparison/mae_model_comparison.png  used on
- input line 1061.
+ input line 1063.
 (pdftex.def)             Requested size: 204.85802pt x 126.71695pt.
-<img/model_comparison/rmse_model_comparison.png, id=354, 570.933pt x 353.1594pt
+<img/model_comparison/rmse_model_comparison.png, id=359, 570.933pt x 353.1594pt
 >
 File: img/model_comparison/rmse_model_comparison.png Graphic file (type png)
 <use img/model_comparison/rmse_model_comparison.png>
 Package pdftex.def Info: img/model_comparison/rmse_model_comparison.png  used o
-n input line 1066.
+n input line 1068.
 (pdftex.def)             Requested size: 204.85802pt x 126.71695pt.
  [12 <./img/model_comparison/mae_model_comparison.png> <./img/model_comparison/
 rmse_model_comparison.png>]
-<img/model_comparison/coverage_model_comparison.png, id=368, 570.933pt x 353.15
+<img/model_comparison/coverage_model_comparison.png, id=373, 570.933pt x 353.15
 94pt>
 File: img/model_comparison/coverage_model_comparison.png Graphic file (type png
 )
 <use img/model_comparison/coverage_model_comparison.png>
 Package pdftex.def Info: img/model_comparison/coverage_model_comparison.png  us
-ed on input line 1159.
+ed on input line 1161.
 (pdftex.def)             Requested size: 209.1301pt x 129.35744pt.
-<img/model_comparison/interval_width_model_comparison.png, id=369, 570.6921pt x
+<img/model_comparison/interval_width_model_comparison.png, id=374, 570.6921pt x
  353.1594pt>
 File: img/model_comparison/interval_width_model_comparison.png Graphic file (ty
 pe png)
 <use img/model_comparison/interval_width_model_comparison.png>
 Package pdftex.def Info: img/model_comparison/interval_width_model_comparison.p
-ng  used on input line 1164.
+ng  used on input line 1166.
 (pdftex.def)             Requested size: 209.1301pt x 129.41133pt.
-<img/temporal_gru/calibration_plot.png, id=372, 498.663pt x 497.6994pt>
+<img/temporal_gru/calibration_plot.png, id=377, 498.663pt x 497.6994pt>
 File: img/temporal_gru/calibration_plot.png Graphic file (type png)
 <use img/temporal_gru/calibration_plot.png>
 Package pdftex.def Info: img/temporal_gru/calibration_plot.png  used on input l
-ine 1190.
+ine 1192.
 (pdftex.def)             Requested size: 209.1301pt x 208.72095pt.
-<img/graph_temporal/calibration_plot.png, id=373, 498.663pt x 497.6994pt>
+<img/graph_temporal/calibration_plot.png, id=378, 498.663pt x 497.6994pt>
 File: img/graph_temporal/calibration_plot.png Graphic file (type png)
 <use img/graph_temporal/calibration_plot.png>
 Package pdftex.def Info: img/graph_temporal/calibration_plot.png  used on input
- line 1195.
+ line 1197.
 (pdftex.def)             Requested size: 209.1301pt x 208.72095pt.
 
 [13 <./img/model_comparison/coverage_model_comparison.png> <./img/model_compari
 son/interval_width_model_comparison.png>]
-<img/graph_impact_analysis/graph_hurts_h3_sensor_760650.png, id=387, 787.743pt 
-x 353.1594pt>
-File: img/graph_impact_analysis/graph_hurts_h3_sensor_760650.png Graphic file (
-type png)
-<use img/graph_impact_analysis/graph_hurts_h3_sensor_760650.png>
-Package pdftex.def Info: img/graph_impact_analysis/graph_hurts_h3_sensor_760650
-.png  used on input line 1254.
-(pdftex.def)             Requested size: 341.43437pt x 153.07343pt.
-<img/graph_impact_analysis/graph_hurts_h6_sensor_717513.png, id=388, 787.743pt 
-x 353.1594pt>
-File: img/graph_impact_analysis/graph_hurts_h6_sensor_717513.png Graphic file (
-type png)
-<use img/graph_impact_analysis/graph_hurts_h6_sensor_717513.png>
-Package pdftex.def Info: img/graph_impact_analysis/graph_hurts_h6_sensor_717513
-.png  used on input line 1259.
-(pdftex.def)             Requested size: 341.43437pt x 153.07343pt.
-<img/graph_impact_analysis/graph_hurts_h12_sensor_717821.png, id=389, 787.743pt
- x 353.1594pt>
-File: img/graph_impact_analysis/graph_hurts_h12_sensor_717821.png Graphic file 
-(type png)
-<use img/graph_impact_analysis/graph_hurts_h12_sensor_717821.png>
-Package pdftex.def Info: img/graph_impact_analysis/graph_hurts_h12_sensor_71782
-1.png  used on input line 1264.
-(pdftex.def)             Requested size: 341.43437pt x 153.07343pt.
-<img/graph_impact_analysis/graph_helps_h3_sensor_764858.png, id=391, 787.743pt 
+<img/graph_impact_analysis/graph_helps_h3_sensor_764858.png, id=392, 787.743pt 
 x 353.1594pt>
 File: img/graph_impact_analysis/graph_helps_h3_sensor_764858.png Graphic file (
 type png)
 <use img/graph_impact_analysis/graph_helps_h3_sensor_764858.png>
 Package pdftex.def Info: img/graph_impact_analysis/graph_helps_h3_sensor_764858
-.png  used on input line 1286.
+.png  used on input line 1256.
 (pdftex.def)             Requested size: 341.43437pt x 153.07343pt.
-<img/graph_impact_analysis/graph_helps_h6_sensor_717461.png, id=392, 787.743pt 
+<img/graph_impact_analysis/graph_helps_h6_sensor_717461.png, id=393, 787.743pt 
 x 353.1594pt>
 File: img/graph_impact_analysis/graph_helps_h6_sensor_717461.png Graphic file (
 type png)
 <use img/graph_impact_analysis/graph_helps_h6_sensor_717461.png>
 Package pdftex.def Info: img/graph_impact_analysis/graph_helps_h6_sensor_717461
-.png  used on input line 1291.
+.png  used on input line 1261.
 (pdftex.def)             Requested size: 341.43437pt x 153.07343pt.
-<img/graph_impact_analysis/graph_helps_h12_sensor_717458.png, id=393, 787.743pt
+<img/graph_impact_analysis/graph_helps_h12_sensor_717458.png, id=394, 787.743pt
  x 353.1594pt>
 File: img/graph_impact_analysis/graph_helps_h12_sensor_717458.png Graphic file 
 (type png)
 <use img/graph_impact_analysis/graph_helps_h12_sensor_717458.png>
 Package pdftex.def Info: img/graph_impact_analysis/graph_helps_h12_sensor_71745
-8.png  used on input line 1296.
+8.png  used on input line 1266.
+(pdftex.def)             Requested size: 341.43437pt x 153.07343pt.
+<img/graph_impact_analysis/graph_hurts_h3_sensor_760650.png, id=395, 787.743pt 
+x 353.1594pt>
+File: img/graph_impact_analysis/graph_hurts_h3_sensor_760650.png Graphic file (
+type png)
+<use img/graph_impact_analysis/graph_hurts_h3_sensor_760650.png>
+Package pdftex.def Info: img/graph_impact_analysis/graph_hurts_h3_sensor_760650
+.png  used on input line 1281.
+(pdftex.def)             Requested size: 341.43437pt x 153.07343pt.
+<img/graph_impact_analysis/graph_hurts_h6_sensor_717513.png, id=396, 787.743pt 
+x 353.1594pt>
+File: img/graph_impact_analysis/graph_hurts_h6_sensor_717513.png Graphic file (
+type png)
+<use img/graph_impact_analysis/graph_hurts_h6_sensor_717513.png>
+Package pdftex.def Info: img/graph_impact_analysis/graph_hurts_h6_sensor_717513
+.png  used on input line 1286.
+(pdftex.def)             Requested size: 341.43437pt x 153.07343pt.
+<img/graph_impact_analysis/graph_hurts_h12_sensor_717821.png, id=397, 787.743pt
+ x 353.1594pt>
+File: img/graph_impact_analysis/graph_hurts_h12_sensor_717821.png Graphic file 
+(type png)
+<use img/graph_impact_analysis/graph_hurts_h12_sensor_717821.png>
+Package pdftex.def Info: img/graph_impact_analysis/graph_hurts_h12_sensor_71782
+1.png  used on input line 1291.
 (pdftex.def)             Requested size: 341.43437pt x 153.07343pt.
  [14 <./img/temporal_gru/calibration_plot.png> <./img/graph_temporal/calibratio
 n_plot.png>]
 <img/graph_temporal/variant_comparison/mae_graph_temporal_variant_comparison.pn
-g, id=405, 570.933pt x 353.1594pt>
+g, id=410, 570.933pt x 353.1594pt>
 File: img/graph_temporal/variant_comparison/mae_graph_temporal_variant_comparis
 on.png Graphic file (type png)
 <use img/graph_temporal/variant_comparison/mae_graph_temporal_variant_compariso
 n.png>
 Package pdftex.def Info: img/graph_temporal/variant_comparison/mae_graph_tempor
-al_variant_comparison.png  used on input line 1362.
+al_variant_comparison.png  used on input line 1365.
 (pdftex.def)             Requested size: 204.85802pt x 126.71695pt.
 <img/graph_temporal/variant_comparison/rmse_graph_temporal_variant_comparison.p
-ng, id=406, 570.933pt x 353.1594pt>
+ng, id=411, 570.933pt x 353.1594pt>
 File: img/graph_temporal/variant_comparison/rmse_graph_temporal_variant_compari
 son.png Graphic file (type png)
 <use img/graph_temporal/variant_comparison/rmse_graph_temporal_variant_comparis
 on.png>
 Package pdftex.def Info: img/graph_temporal/variant_comparison/rmse_graph_tempo
-ral_variant_comparison.png  used on input line 1367.
+ral_variant_comparison.png  used on input line 1370.
 (pdftex.def)             Requested size: 204.85802pt x 126.71695pt.
 <img/graph_temporal/variant_comparison//coverage_graph_temporal_variant_compari
-son.png, id=407, 570.933pt x 353.1594pt>
+son.png, id=412, 570.933pt x 353.1594pt>
 File: img/graph_temporal/variant_comparison//coverage_graph_temporal_variant_co
 mparison.png Graphic file (type png)
 <use img/graph_temporal/variant_comparison//coverage_graph_temporal_variant_com
 parison.png>
 Package pdftex.def Info: img/graph_temporal/variant_comparison//coverage_graph_
-temporal_variant_comparison.png  used on input line 1375.
+temporal_variant_comparison.png  used on input line 1378.
 (pdftex.def)             Requested size: 204.85802pt x 126.71695pt.
 <img/graph_temporal/variant_comparison/interval_width_graph_temporal_variant_co
-mparison.png, id=408, 570.933pt x 353.1594pt>
+mparison.png, id=413, 570.933pt x 353.1594pt>
 File: img/graph_temporal/variant_comparison/interval_width_graph_temporal_varia
 nt_comparison.png Graphic file (type png)
 <use img/graph_temporal/variant_comparison/interval_width_graph_temporal_varian
 t_comparison.png>
 Package pdftex.def Info: img/graph_temporal/variant_comparison/interval_width_g
-raph_temporal_variant_comparison.png  used on input line 1380.
+raph_temporal_variant_comparison.png  used on input line 1383.
 (pdftex.def)             Requested size: 204.85802pt x 126.71695pt.
- [15 <./img/graph_impact_analysis/graph_hurts_h3_sensor_760650.png> <./img/grap
-h_impact_analysis/graph_hurts_h6_sensor_717513.png> <./img/graph_impact_analysi
-s/graph_hurts_h12_sensor_717821.png>] [16 <./img/graph_impact_analysis/graph_he
-lps_h3_sensor_764858.png> <./img/graph_impact_analysis/graph_helps_h6_sensor_71
-7461.png> <./img/graph_impact_analysis/graph_helps_h12_sensor_717458.png>]
+ [15 <./img/graph_impact_analysis/graph_helps_h3_sensor_764858.png> <./img/grap
+h_impact_analysis/graph_helps_h6_sensor_717461.png> <./img/graph_impact_analysi
+s/graph_helps_h12_sensor_717458.png>] [16 <./img/graph_impact_analysis/graph_hu
+rts_h3_sensor_760650.png> <./img/graph_impact_analysis/graph_hurts_h6_sensor_71
+7513.png> <./img/graph_impact_analysis/graph_hurts_h12_sensor_717821.png>]
 <img/graph_temporal/ablation_comparison/mae_graph_temporal_variant_comparison.p
-ng, id=426, 570.933pt x 353.1594pt>
+ng, id=431, 570.933pt x 353.1594pt>
 File: img/graph_temporal/ablation_comparison/mae_graph_temporal_variant_compari
 son.png Graphic file (type png)
 <use img/graph_temporal/ablation_comparison/mae_graph_temporal_variant_comparis
 on.png>
 Package pdftex.def Info: img/graph_temporal/ablation_comparison/mae_graph_tempo
-ral_variant_comparison.png  used on input line 1474.
+ral_variant_comparison.png  used on input line 1477.
 (pdftex.def)             Requested size: 204.85802pt x 126.71695pt.
 <img/graph_temporal/ablation_comparison/rmse_graph_temporal_variant_comparison.
-png, id=427, 570.933pt x 353.1594pt>
+png, id=432, 570.933pt x 353.1594pt>
 File: img/graph_temporal/ablation_comparison/rmse_graph_temporal_variant_compar
 ison.png Graphic file (type png)
 <use img/graph_temporal/ablation_comparison/rmse_graph_temporal_variant_compari
 son.png>
 Package pdftex.def Info: img/graph_temporal/ablation_comparison/rmse_graph_temp
-oral_variant_comparison.png  used on input line 1479.
+oral_variant_comparison.png  used on input line 1482.
 (pdftex.def)             Requested size: 204.85802pt x 126.71695pt.
 <img/graph_temporal/ablation_comparison/coverage_graph_temporal_variant_compari
-son.png, id=428, 571.1739pt x 353.1594pt>
+son.png, id=433, 571.1739pt x 353.1594pt>
 File: img/graph_temporal/ablation_comparison/coverage_graph_temporal_variant_co
 mparison.png Graphic file (type png)
 <use img/graph_temporal/ablation_comparison/coverage_graph_temporal_variant_com
 parison.png>
 Package pdftex.def Info: img/graph_temporal/ablation_comparison/coverage_graph_
-temporal_variant_comparison.png  used on input line 1487.
+temporal_variant_comparison.png  used on input line 1490.
 (pdftex.def)             Requested size: 204.85802pt x 126.66306pt.
 <img/graph_temporal/ablation_comparison/interval_width_graph_temporal_variant_c
-omparison.png, id=429, 570.933pt x 353.1594pt>
+omparison.png, id=434, 570.933pt x 353.1594pt>
 File: img/graph_temporal/ablation_comparison/interval_width_graph_temporal_vari
 ant_comparison.png Graphic file (type png)
 <use img/graph_temporal/ablation_comparison/interval_width_graph_temporal_varia
 nt_comparison.png>
 Package pdftex.def Info: img/graph_temporal/ablation_comparison/interval_width_
-graph_temporal_variant_comparison.png  used on input line 1492.
+graph_temporal_variant_comparison.png  used on input line 1495.
 (pdftex.def)             Requested size: 204.85802pt x 126.71695pt.
  [17 <./img/graph_temporal/variant_comparison/mae_graph_temporal_variant_compar
 ison.png> <./img/graph_temporal/variant_comparison/rmse_graph_temporal_variant_
@@ -806,87 +806,124 @@ ation_comparison/rmse_graph_temporal_variant_comparison.png> <./img/graph_tempo
 ral/ablation_comparison/coverage_graph_temporal_variant_comparison.png> <./img/
 graph_temporal/ablation_comparison/interval_width_graph_temporal_variant_compar
 ison.png>]
-<img/distribution_shift/congestion_ratio_distribution.png, id=451, 715.473pt x 
+<img/distribution_shift/congestion_ratio_distribution.png, id=456, 715.473pt x 
 353.1594pt>
 File: img/distribution_shift/congestion_ratio_distribution.png Graphic file (ty
 pe png)
 <use img/distribution_shift/congestion_ratio_distribution.png>
 Package pdftex.def Info: img/distribution_shift/congestion_ratio_distribution.p
-ng  used on input line 1608.
+ng  used on input line 1611.
 (pdftex.def)             Requested size: 320.0935pt x 157.99876pt.
  [19 <./img/distribution_shift/congestion_ratio_distribution.png>]
-<img/distribution_shift/mae_distribution_shift.png, id=466, 570.933pt x 353.159
+<img/distribution_shift/mae_distribution_shift.png, id=471, 570.933pt x 353.159
 4pt>
 File: img/distribution_shift/mae_distribution_shift.png Graphic file (type png)
 
 <use img/distribution_shift/mae_distribution_shift.png>
 Package pdftex.def Info: img/distribution_shift/mae_distribution_shift.png  use
-d on input line 1723.
+d on input line 1725.
 (pdftex.def)             Requested size: 204.85802pt x 126.71695pt.
-<img/distribution_shift/rmse_distribution_shift.png, id=467, 570.6921pt x 353.1
+<img/distribution_shift/rmse_distribution_shift.png, id=472, 570.6921pt x 353.1
 594pt>
 File: img/distribution_shift/rmse_distribution_shift.png Graphic file (type png
 )
 <use img/distribution_shift/rmse_distribution_shift.png>
 Package pdftex.def Info: img/distribution_shift/rmse_distribution_shift.png  us
-ed on input line 1729.
+ed on input line 1731.
 (pdftex.def)             Requested size: 204.85802pt x 126.77083pt.
-<img/distribution_shift/coverage_distribution_shift.png, id=468, 570.933pt x 35
+<img/distribution_shift/coverage_distribution_shift.png, id=473, 570.933pt x 35
 3.1594pt>
 File: img/distribution_shift/coverage_distribution_shift.png Graphic file (type
  png)
 <use img/distribution_shift/coverage_distribution_shift.png>
 Package pdftex.def Info: img/distribution_shift/coverage_distribution_shift.png
-  used on input line 1738.
+  used on input line 1740.
 (pdftex.def)             Requested size: 204.85802pt x 126.71695pt.
-<img/distribution_shift/interval_width_distribution_shift.png, id=469, 570.6921
+<img/distribution_shift/interval_width_distribution_shift.png, id=474, 570.6921
 pt x 353.1594pt>
 File: img/distribution_shift/interval_width_distribution_shift.png Graphic file
  (type png)
 <use img/distribution_shift/interval_width_distribution_shift.png>
 Package pdftex.def Info: img/distribution_shift/interval_width_distribution_shi
-ft.png  used on input line 1744.
+ft.png  used on input line 1746.
 (pdftex.def)             Requested size: 204.85802pt x 126.77083pt.
  [20 <./img/distribution_shift/mae_distribution_shift.png> <./img/distribution_
 shift/rmse_distribution_shift.png> <./img/distribution_shift/coverage_distribut
 ion_shift.png> <./img/distribution_shift/interval_width_distribution_shift.png>
 ]
-<img/distribution_shift/normal_period.png, id=483, 715.2321pt x 353.1594pt>
+<img/distribution_shift/normal_period.png, id=488, 715.2321pt x 353.1594pt>
 File: img/distribution_shift/normal_period.png Graphic file (type png)
 <use img/distribution_shift/normal_period.png>
 Package pdftex.def Info: img/distribution_shift/normal_period.png  used on inpu
-t line 1823.
+t line 1827.
 (pdftex.def)             Requested size: 209.1301pt x 103.25963pt.
-<img/distribution_shift/high_congestion_period.png, id=484, 715.473pt x 353.159
+<img/distribution_shift/high_congestion_period.png, id=489, 715.473pt x 353.159
 4pt>
 File: img/distribution_shift/high_congestion_period.png Graphic file (type png)
 
 <use img/distribution_shift/high_congestion_period.png>
 Package pdftex.def Info: img/distribution_shift/high_congestion_period.png  use
-d on input line 1829.
+d on input line 1833.
 (pdftex.def)             Requested size: 209.1301pt x 103.2273pt.
  [21 <./img/distribution_shift/normal_period.png> <./img/distribution_shift/hig
 h_congestion_period.png>]
 [22]
-<img/mitigation_strategy/coverage_mitigation_comparison.png, id=507, 643.203pt 
+<img/mitigation_strategy/coverage_mitigation_comparison.png, id=512, 643.203pt 
 x 353.1594pt>
 File: img/mitigation_strategy/coverage_mitigation_comparison.png Graphic file (
 type png)
 <use img/mitigation_strategy/coverage_mitigation_comparison.png>
 Package pdftex.def Info: img/mitigation_strategy/coverage_mitigation_comparison
-.png  used on input line 2036.
+.png  used on input line 2041.
 (pdftex.def)             Requested size: 209.1301pt x 114.82393pt.
-<img/mitigation_strategy/interval_width_mitigation_comparison.png, id=508, 642.
+<img/mitigation_strategy/interval_width_mitigation_comparison.png, id=513, 642.
 9621pt x 353.1594pt>
 File: img/mitigation_strategy/interval_width_mitigation_comparison.png Graphic 
 file (type png)
 <use img/mitigation_strategy/interval_width_mitigation_comparison.png>
 Package pdftex.def Info: img/mitigation_strategy/interval_width_mitigation_comp
-arison.png  used on input line 2041.
+arison.png  used on input line 2046.
 (pdftex.def)             Requested size: 209.1301pt x 114.86703pt.
  [23] [24 <./img/mitigation_strategy/coverage_mitigation_comparison.png> <./img
-/mitigation_strategy/interval_width_mitigation_comparison.png>] [25])
-[26] (C:/Users/aless/PycharmProjects/DeepLearningReport/out/main.bbl) [27
+/mitigation_strategy/interval_width_mitigation_comparison.png>]
+<img/congestion_aware_training/mae_distribution_shift.png, id=540, 570.933pt x 
+353.1594pt>
+File: img/congestion_aware_training/mae_distribution_shift.png Graphic file (ty
+pe png)
+<use img/congestion_aware_training/mae_distribution_shift.png>
+Package pdftex.def Info: img/congestion_aware_training/mae_distribution_shift.p
+ng  used on input line 2286.
+(pdftex.def)             Requested size: 204.85802pt x 126.71695pt.
+<img/congestion_aware_training/rmse_distribution_shift.png, id=541, 570.6921pt 
+x 353.1594pt>
+File: img/congestion_aware_training/rmse_distribution_shift.png Graphic file (t
+ype png)
+<use img/congestion_aware_training/rmse_distribution_shift.png>
+Package pdftex.def Info: img/congestion_aware_training/rmse_distribution_shift.
+png  used on input line 2292.
+(pdftex.def)             Requested size: 204.85802pt x 126.77083pt.
+<img/congestion_aware_training/coverage_distribution_shift.png, id=542, 570.933
+pt x 353.1594pt>
+File: img/congestion_aware_training/coverage_distribution_shift.png Graphic fil
+e (type png)
+<use img/congestion_aware_training/coverage_distribution_shift.png>
+Package pdftex.def Info: img/congestion_aware_training/coverage_distribution_sh
+ift.png  used on input line 2301.
+(pdftex.def)             Requested size: 204.85802pt x 126.71695pt.
+<img/congestion_aware_training/interval_width_distribution_shift.png, id=543, 5
+70.6921pt x 353.1594pt>
+File: img/congestion_aware_training/interval_width_distribution_shift.png Graph
+ic file (type png)
+<use img/congestion_aware_training/interval_width_distribution_shift.png>
+Package pdftex.def Info: img/congestion_aware_training/interval_width_distribut
+ion_shift.png  used on input line 2307.
+(pdftex.def)             Requested size: 204.85802pt x 126.77083pt.
+ [25]
+[26 <./img/congestion_aware_training/mae_distribution_shift.png> <./img/congest
+ion_aware_training/rmse_distribution_shift.png> <./img/congestion_aware_trainin
+g/coverage_distribution_shift.png> <./img/congestion_aware_training/interval_wi
+dth_distribution_shift.png>] [27] [28]) [29]
+(C:/Users/aless/PycharmProjects/DeepLearningReport/out/main.bbl) [30
 
 
 ]
@@ -901,16 +938,16 @@ L3 programming layer <2026-01-19>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 93B4238D9892F351A2D997682BCB0E48;7669.
+(rerunfilecheck)             Checksum: DCC2D10D96CB0C5DFEA8E0918C3A783D;7908.
  ) 
 Here is how much of TeX's memory you used:
- 17846 strings out of 467533
- 360529 string characters out of 5423668
- 743975 words of memory out of 5000000
- 46430 multiletter control sequences out of 15000+600000
+ 17902 strings out of 467533
+ 363574 string characters out of 5423668
+ 744630 words of memory out of 5000000
+ 46477 multiletter control sequences out of 15000+600000
  637609 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,79p,482b,1057s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,11n,79p,552b,1057s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/tex
 live/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2025
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><c:/texlive/2025/texmf-dis
@@ -918,24 +955,25 @@ t/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2025/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmbx9.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmcsc10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmex10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
-10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:
-/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2
-025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><c:/texlive/2025/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmr5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pf
-b><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texli
-ve/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2025/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2025/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public
-/amsfonts/symbols/msbm10.pfb>
+10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:
+/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2
+025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2025/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><c:/texlive/2025/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmr5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.p
+fb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texl
+ive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2025/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2025/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmtt10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/
+symbols/msbm10.pfb>
 Output written on C:/Users/aless/PycharmProjects/DeepLearningReport/out/main.pd
-f (28 pages, 6980062 bytes).
+f (31 pages, 7502581 bytes).
 PDF statistics:
- 666 PDF objects out of 1000 (max. 8388607)
- 515 compressed objects within 6 object streams
- 136 named destinations out of 1000 (max. 500000)
- 509 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 710 PDF objects out of 1000 (max. 8388607)
+ 546 compressed objects within 6 object streams
+ 145 named destinations out of 1000 (max. 500000)
+ 537 words of extra memory for PDF output out of 10000 (max. 10000000)
 

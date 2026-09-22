@@ -102,10 +102,10 @@
 \newlabel{eq:delta_mae}{{23}{14}{When Does the Graph Help?}{equation.23}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Effect of Diffusion Depth}{14}{subsection.6.2}\protected@file@percent }
 \newlabel{subsec:diffusion_depth}{{6.2}{14}{Effect of Diffusion Depth}{subsection.6.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Representative forecasting examples in which the Graph-Temporal model performs worse than the Temporal model at the 15-minute (top), 30-minute (center), and 60-minute (bottom) forecasting horizons.}}{15}{figure.caption.16}\protected@file@percent }
-\newlabel{fig:graph_hurt_examples}{{8}{15}{Representative forecasting examples in which the Graph-Temporal model performs worse than the Temporal model at the 15-minute (top), 30-minute (center), and 60-minute (bottom) forecasting horizons}{figure.caption.16}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Representative forecasting examples in which the Graph-Temporal model improves over the Temporal GRU at the 15-minute (top), 30-minute (center), and 60-minute (bottom) forecasting horizons.}}{16}{figure.caption.17}\protected@file@percent }
-\newlabel{fig:graph_help_examples}{{9}{16}{Representative forecasting examples in which the Graph-Temporal model improves over the Temporal GRU at the 15-minute (top), 30-minute (center), and 60-minute (bottom) forecasting horizons}{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Representative forecasting examples in which the Graph-Temporal model improves over the Temporal GRU at the 15-minute (top), 30-minute (center), and 60-minute (bottom) forecasting horizons.}}{15}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:graph_help_examples}{{8}{15}{Representative forecasting examples in which the Graph-Temporal model improves over the Temporal GRU at the 15-minute (top), 30-minute (center), and 60-minute (bottom) forecasting horizons}{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Representative forecasting examples in which the Graph-Temporal model performs worse than the Temporal model at the 15-minute (top), 30-minute (center), and 60-minute (bottom) forecasting horizons.}}{16}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:graph_hurt_examples}{{9}{16}{Representative forecasting examples in which the Graph-Temporal model performs worse than the Temporal model at the 15-minute (top), 30-minute (center), and 60-minute (bottom) forecasting horizons}{figure.caption.17}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Graph Ablation: Weighted vs. Binary Adjacency}{16}{subsection.6.3}\protected@file@percent }
 \newlabel{subsec:weighted_binary}{{6.3}{16}{Graph Ablation: Weighted vs. Binary Adjacency}{subsection.6.3}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Test performance of the Graph-Temporal model with diffusion depths $K=2$ and $K=3$.}}{17}{table.caption.18}\protected@file@percent }
@@ -154,25 +154,32 @@
 \newlabel{subsubsec:cqr_results}{{8.1.1}{23}{Calibration Results}{subsubsection.8.1.1}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Effect of CQR calibration on empirical coverage (left) and prediction interval width (right) under overall, normal, and high-congestion conditions.}}{24}{figure.caption.27}\protected@file@percent }
 \newlabel{fig:cqr_results}{{15}{24}{Effect of CQR calibration on empirical coverage (left) and prediction interval width (right) under overall, normal, and high-congestion conditions}{figure.caption.27}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Computational cost of the Temporal and Graph-Temporal models.}}{24}{table.caption.28}\protected@file@percent }
-\newlabel{tab:computational_cost}{{10}{24}{Computational cost of the Temporal and Graph-Temporal models}{table.caption.28}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Congestion-Aware Training}{24}{subsection.8.2}\protected@file@percent }
 \newlabel{subsec:congestion_aware}{{8.2}{24}{Congestion-Aware Training}{subsection.8.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9}Computational Cost and Accuracy-Reliability Trade-off}{24}{section.9}\protected@file@percent }
-\newlabel{sec:cost_tradeoff}{{9}{24}{Computational Cost and Accuracy-Reliability Trade-off}{section.9}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {10}Discussion}{25}{section.10}\protected@file@percent }
-\newlabel{sec:discussion}{{10}{25}{Discussion}{section.10}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Main Findings}{25}{subsection.10.1}\protected@file@percent }
-\newlabel{subsec:main_findings}{{10.1}{25}{Main Findings}{subsection.10.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}Limitations}{25}{subsection.10.2}\protected@file@percent }
-\newlabel{subsec:limitations}{{10.2}{25}{Limitations}{subsection.10.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Future Improvements}{26}{subsection.10.3}\protected@file@percent }
-\newlabel{subsec:future_improvements}{{10.3}{26}{Future Improvements}{subsection.10.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {11}Conclusion}{26}{section.11}\protected@file@percent }
-\newlabel{sec:conclusion}{{11}{26}{Conclusion}{section.11}{}}
+\newlabel{eq:congestion_weight}{{33}{24}{Congestion-Aware Training}{equation.33}{}}
+\newlabel{eq:congestion_aware_loss}{{34}{24}{Congestion-Aware Training}{equation.34}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.2.1}Congestion-Aware Training Results}{25}{subsubsection.8.2.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Performance of the original and congestion-aware Graph-Temporal models under high-congestion conditions.}}{25}{table.caption.28}\protected@file@percent }
+\newlabel{tab:congestion_aware_results}{{10}{25}{Performance of the original and congestion-aware Graph-Temporal models under high-congestion conditions}{table.caption.28}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces Computational cost of the Temporal and Graph-Temporal models.}}{26}{table.caption.30}\protected@file@percent }
+\newlabel{tab:computational_cost}{{11}{26}{Computational cost of the Temporal and Graph-Temporal models}{table.caption.30}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Performance of the congestion-aware Graph-Temporal model across the evaluated forecasting horizons. The top row reports point forecasting accuracy in terms of MAE (left) and RMSE (right), while the bottom row reports empirical coverage (left) and prediction interval width (right). Results are shown for the overall test set, normal traffic conditions, and high-congestion periods.}}{26}{figure.caption.29}\protected@file@percent }
+\newlabel{fig:congestion_aware_results}{{16}{26}{Performance of the congestion-aware Graph-Temporal model across the evaluated forecasting horizons. The top row reports point forecasting accuracy in terms of MAE (left) and RMSE (right), while the bottom row reports empirical coverage (left) and prediction interval width (right). Results are shown for the overall test set, normal traffic conditions, and high-congestion periods}{figure.caption.29}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Computational Cost and Accuracy-Reliability Trade-off}{26}{section.9}\protected@file@percent }
+\newlabel{sec:cost_tradeoff}{{9}{26}{Computational Cost and Accuracy-Reliability Trade-off}{section.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {10}Discussion}{27}{section.10}\protected@file@percent }
+\newlabel{sec:discussion}{{10}{27}{Discussion}{section.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Main Findings}{27}{subsection.10.1}\protected@file@percent }
+\newlabel{subsec:main_findings}{{10.1}{27}{Main Findings}{subsection.10.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}Limitations}{27}{subsection.10.2}\protected@file@percent }
+\newlabel{subsec:limitations}{{10.2}{27}{Limitations}{subsection.10.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Future Improvements}{28}{subsection.10.3}\protected@file@percent }
+\newlabel{subsec:future_improvements}{{10.3}{28}{Future Improvements}{subsection.10.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11}Conclusion}{28}{section.11}\protected@file@percent }
+\newlabel{sec:conclusion}{{11}{28}{Conclusion}{section.11}{}}
 \@setckpt{All}{
-\setcounter{page}{27}
-\setcounter{equation}{31}
+\setcounter{page}{30}
+\setcounter{equation}{34}
 \setcounter{enumi}{4}
 \setcounter{enumii}{0}
 \setcounter{enumiii}{0}
@@ -185,14 +192,14 @@
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{15}
-\setcounter{table}{10}
+\setcounter{figure}{16}
+\setcounter{table}{11}
 \setcounter{parentequation}{0}
 \setcounter{float@type}{4}
 \setcounter{section@level}{1}
 \setcounter{Item}{4}
 \setcounter{Hfootnote}{0}
-\setcounter{bookmark@seq@number}{41}
+\setcounter{bookmark@seq@number}{42}
 \setcounter{caption@flags}{2}
 \setcounter{continuedfloat}{0}
 \setcounter{subfigure}{0}
