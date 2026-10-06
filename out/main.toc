@@ -22,11 +22,11 @@
 \contentsline {subsection}{\numberline {4.4}Hardware and Reproducibility}{11}{subsection.4.4}%
 \contentsline {section}{\numberline {5}In-Distribution Forecasting Results}{12}{section.5}%
 \contentsline {subsection}{\numberline {5.1}Point Forecasting Performance}{12}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Probabilistic Forecasting and Calibration}{12}{subsection.5.2}%
-\contentsline {section}{\numberline {6}Analysis of the Graph Component}{13}{section.6}%
-\contentsline {subsection}{\numberline {6.1}When Does the Graph Help?}{13}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Effect of Diffusion Depth}{14}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Graph Ablation: Weighted vs. Binary Adjacency}{16}{subsection.6.3}%
+\contentsline {subsection}{\numberline {5.2}Probabilistic Forecasting and Calibration}{13}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Analysis of the Graph Component}{14}{section.6}%
+\contentsline {subsection}{\numberline {6.1}When Does the Graph Help?}{14}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Effect of Diffusion Depth}{15}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Graph Ablation: Weighted vs. Binary Adjacency}{17}{subsection.6.3}%
 \contentsline {section}{\numberline {7}Robustness under Distribution Shift}{18}{section.7}%
 \contentsline {subsection}{\numberline {7.1}High-Congestion Definition}{18}{subsection.7.1}%
 \contentsline {subsection}{\numberline {7.2}Stress-Test Protocol}{19}{subsection.7.2}%
@@ -40,6 +40,6 @@
 \contentsline {section}{\numberline {9}Computational Cost and Accuracy-Reliability Trade-off}{26}{section.9}%
 \contentsline {section}{\numberline {10}Discussion}{27}{section.10}%
 \contentsline {subsection}{\numberline {10.1}Main Findings}{27}{subsection.10.1}%
-\contentsline {subsection}{\numberline {10.2}Limitations}{27}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.2}Limitations}{28}{subsection.10.2}%
 \contentsline {subsection}{\numberline {10.3}Future Improvements}{28}{subsection.10.3}%
 \contentsline {section}{\numberline {11}Conclusion}{28}{section.11}%

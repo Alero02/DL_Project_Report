@@ -1055,6 +1055,17 @@ Figure~\ref{fig:point_performance}, where the performance gap between the
 Temporal model and the Graph-Temporal model becomes progressively larger toward
 the 60-minute horizon.
 
+
+
+
+As a sanity check, I compared the magnitude of my errors with results reported in the literature on METR-LA \cite{li2018dcrnn}.
+DCRNN, which uses a substantially more sophisticated spatio-temporal architecture, reports MAEs of 2.77, 3.15 and 3.60 at 15, 30 and
+60 minutes, while my compact Graph-Temporal model obtains 2.90, 3.44 and 4.24.
+The experimental settings are not exactly the same, so this is not a direct benchmark comparison.
+However, the comparable order of magnitude supports that the implemented model is effectively learning the forecasting task.
+
+
+
 \begin{figure}[t]
     \centering
 
